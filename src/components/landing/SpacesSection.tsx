@@ -1,10 +1,9 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import Image from 'next/image'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { useScrollAnimation } from '@/lib/useScrollAnimation'
+import { cn } from '@/lib/utils'
 
 const spaces = [
   { id: 'salao', label: 'Salão principal', src: '/assets/salao.webp', description: 'Ambiente amplo e versátil, ideal para festas, confraternizações e eventos especiais com toda a estrutura necessária.' },
@@ -16,102 +15,93 @@ const spaces = [
 
 export default function SpacesSection() {
   const [active, setActive] = useState(0)
-  const [animating, setAnimating] = useState(false)
-  const imgRef = useRef<HTMLDivElement>(null)
-  const sectionRef = useScrollAnimation<HTMLElement>({ selector: '.space-header', stagger: false })
+  const space = spaces[active]
 
-  const goTo = async (idx: number) => {
-    if (animating || idx === active) return
-    setAnimating(true)
-
-    const { gsap } = await import('gsap')
-    if (imgRef.current) {
-      await gsap.to(imgRef.current, { opacity: 0, scale: 1.03, duration: 0.25, ease: 'power2.in' })
-      setActive(idx)
-      await gsap.fromTo(imgRef.current, { opacity: 0, scale: 0.98 }, { opacity: 1, scale: 1, duration: 0.35, ease: 'power2.out' })
-    }
-    setAnimating(false)
-  }
-
-  const prev = () => goTo((active - 1 + spaces.length) % spaces.length)
-  const next = () => goTo((active + 1) % spaces.length)
-
-  useEffect(() => {
-    const init = async () => {
-      const { gsap } = await import('gsap')
-      const { ScrollTrigger } = await import('gsap/ScrollTrigger')
-      gsap.registerPlugin(ScrollTrigger)
-
-      gsap.fromTo('.space-thumb',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out', stagger: 0.08,
-          scrollTrigger: { trigger: '.space-thumbs', start: 'top 85%', once: true } }
-      )
-    }
-    init()
-  }, [])
+  const prev = () => setActive((a) => (a - 1 + spaces.length) % spaces.length)
+  const next = () => setActive((a) => (a + 1) % spaces.length)
 
   return (
-    <section id="espaco" ref={sectionRef} className="bg-[#F8F4EE] py-20 md:py-28">
-      <div className="max-w-6xl mx-auto px-6">
-
-        <div className="space-header text-center mb-14">
-          <Badge className="mb-5">Conheça nosso espaço</Badge>
-          <h2 className="text-4xl md:text-5xl font-black text-[#161616] mb-4 leading-tight">
-            Um ambiente pensado para{' '}
-            <span className="text-[#C6A15B]">celebrar</span>
+    <section id="espaco" className="bg-folha py-20 md:py-28">
+      <div className="max-w-6xl mx-auto px-5 sm:px-6">
+        <header className="max-w-2xl mb-10 md:mb-12">
+          <h2 className="font-display font-semibold text-4xl md:text-5xl leading-tight text-tinta">
+            Conheça o espaço
           </h2>
-          <p className="text-[#6F6A63] text-lg max-w-2xl mx-auto leading-relaxed">
-            Estrutura acolhedora, sofisticada e preparada para receber momentos especiais com segurança, elegância e muita alegria.
+          <p className="mt-4 text-lg leading-relaxed text-pedra">
+            Salão coberto, espaço para decoração, piscina e área kids no mesmo lugar.
+            Veja cada ambiente antes de escolher a data.
           </p>
-        </div>
+        </header>
 
-        <div className="grid lg:grid-cols-[1.4fr_0.6fr] gap-6 items-start">
-          {/* Imagem principal */}
-          <div className="relative">
-            <div
-              ref={imgRef}
-              className="relative aspect-[4/3] rounded-[2rem] overflow-hidden bg-[#E5DDD0] shadow-xl"
-            >
+        <div className="grid gap-6 lg:grid-cols-[minmax(0,1.5fr)_minmax(0,0.5fr)] lg:items-start">
+          <figure className="min-w-0">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-musgo">
+              {/* key força a troca com fade curto, sem bloquear cliques durante a animação */}
               <Image
-                src={spaces[active].src}
-                alt={spaces[active].label}
+                key={space.id}
+                src={space.src}
+                alt={space.label}
                 fill
-                className="object-cover"
-                priority
-                sizes="(max-width: 1024px) 100vw, 60vw"
+                className="object-cover motion-safe:animate-[fade-in_300ms_ease-out]"
+                priority={active === 0}
+                sizes="(max-width: 1024px) 100vw, 70vw"
               />
-              {/* Overlay info */}
-              <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/70 to-transparent">
-                <p className="text-white font-bold text-lg mb-1">{spaces[active].label}</p>
-                <p className="text-white/70 text-sm leading-relaxed">{spaces[active].description}</p>
+            </div>
+
+            <figcaption className="mt-5 flex flex-col sm:flex-row sm:items-start gap-4 sm:gap-8">
+              <div className="flex-1 min-w-0" aria-live="polite">
+                <p className="font-display font-semibold text-2xl text-tinta">{space.label}</p>
+                <p className="mt-1.5 text-base leading-relaxed text-pedra max-w-prose">{space.description}</p>
               </div>
-            </div>
+              <div className="flex items-center gap-2 flex-shrink-0">
+                <span className="text-sm text-pedra tabular-nums mr-2" aria-hidden="true">
+                  {active + 1} de {spaces.length}
+                </span>
+                <button
+                  type="button"
+                  onClick={prev}
+                  aria-label="Foto anterior"
+                  className="w-11 h-11 rounded-lg border border-linha bg-papel inline-flex items-center justify-center text-tinta-2 hover:border-mata hover:text-mata transition-colors duration-200"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button
+                  type="button"
+                  onClick={next}
+                  aria-label="Próxima foto"
+                  className="w-11 h-11 rounded-lg border border-linha bg-papel inline-flex items-center justify-center text-tinta-2 hover:border-mata hover:text-mata transition-colors duration-200"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+            </figcaption>
+          </figure>
 
-            {/* Prev/Next */}
-            <div className="flex gap-2 mt-4 justify-end">
-              <button onClick={prev} className="w-10 h-10 rounded-full border border-[#E5DDD0] bg-white flex items-center justify-center text-[#6F6A63] hover:border-[#C6A15B] hover:text-[#C6A15B] transition-all duration-200">
-                <ChevronLeft size={18} />
-              </button>
-              <button onClick={next} className="w-10 h-10 rounded-full border border-[#E5DDD0] bg-white flex items-center justify-center text-[#6F6A63] hover:border-[#C6A15B] hover:text-[#C6A15B] transition-all duration-200">
-                <ChevronRight size={18} />
-              </button>
-            </div>
-          </div>
-
-          {/* Thumbnails */}
-          <div className="space-thumbs flex lg:flex-col gap-3 overflow-x-auto lg:overflow-visible pb-2 lg:pb-0">
+          <div
+            role="group"
+            aria-label="Ambientes"
+            className="flex lg:flex-col gap-3 overflow-x-auto snap-x snap-mandatory scroll-px-5 sm:scroll-px-0 -mx-5 px-5 sm:mx-0 sm:px-0 pb-2 lg:pb-0 [scrollbar-width:none]"
+          >
             {spaces.map((s, i) => (
               <button
                 key={s.id}
-                onClick={() => goTo(i)}
-                className={`space-thumb group relative flex-shrink-0 w-24 h-20 lg:w-full lg:h-24 rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
-                  i === active ? 'border-[#C6A15B] shadow-md' : 'border-transparent opacity-60 hover:opacity-90 hover:border-[#E7D3A8]'
-                }`}
+                type="button"
+                onClick={() => setActive(i)}
+                aria-pressed={i === active}
+                className={cn(
+                  'snap-start flex-shrink-0 w-32 lg:w-full text-left rounded-xl p-1.5 border-2 transition-colors duration-200',
+                  i === active ? 'border-mata bg-papel' : 'border-transparent hover:border-linha'
+                )}
               >
-                <Image src={s.src} alt={s.label} fill className="object-cover" sizes="200px" />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors" />
-                <span className="absolute bottom-1.5 left-0 right-0 text-center text-white text-[10px] font-semibold px-1 drop-shadow">
+                <span className="relative block aspect-[4/3] lg:aspect-[16/9] rounded-lg overflow-hidden bg-musgo">
+                  <Image src={s.src} alt="" fill className="object-cover" sizes="200px" />
+                </span>
+                <span
+                  className={cn(
+                    'block px-1 pt-1.5 pb-0.5 text-sm',
+                    i === active ? 'font-bold text-tinta' : 'font-medium text-pedra'
+                  )}
+                >
                   {s.label}
                 </span>
               </button>

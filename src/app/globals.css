@@ -1,23 +1,27 @@
 @import "tailwindcss";
 
+/* Mesma identidade do app de reservas ("convite"): mata + ouro velho, Alegreya. */
 @theme {
-  --color-gold: #C6A15B;
-  --color-gold-soft: #E7D3A8;
-  --color-gold-dark: #A07C2A;
-  --color-cream: #F8F4EE;
-  --color-cream-light: #FCFAF5;
-  --color-ink: #161616;
-  --color-charcoal: #2A2A2A;
-  --color-stone: #6F6A63;
-  --color-line: #E5DDD0;
-  --color-brand: #1f4f41;
-  --color-brand-mid: #2d6a57;
-  --color-brand-dark: #133428;
+  --color-folha: #f1f4ef;       /* fundo da página */
+  --color-papel: #ffffff;       /* superfícies */
+  --color-musgo: #e8ede6;       /* fundo discreto */
+  --color-tinta: #17241e;       /* texto principal */
+  --color-tinta-2: #2e3d36;     /* texto secundário forte */
+  --color-pedra: #5c6b63;       /* texto secundário */
+  --color-linha: #dbe2d9;       /* bordas */
+  --color-mata: #1f4f41;        /* ações */
+  --color-mata-mid: #2d6a57;
+  --color-mata-funda: #133428;  /* seções escuras */
+  --color-mata-noite: #0e271f;  /* rodapé */
+  --color-ouro: #b08a35;        /* decorativo */
+  --color-ouro-claro: #d6b463;  /* ouro sobre fundo escuro */
+  --color-ouro-texto: #7d5f19;  /* ouro legível sobre claro */
 
-  --font-sans: 'Geist', system-ui, sans-serif;
+  --font-display: var(--font-alegreya), Georgia, serif;
+  --font-sans: var(--font-alegreya-sans), system-ui, sans-serif;
 
-  --radius-card: 1.5rem;
-  --radius-card-lg: 2rem;
+  /* Arco de janela colonial — assinatura, usado só no hero e nos planos */
+  --radius-arch: 999px 999px 1rem 1rem;
 }
 
 * {
@@ -26,29 +30,68 @@
 
 html {
   scroll-behavior: smooth;
+  /* âncoras não ficam escondidas sob a navbar fixa */
+  scroll-padding-top: 76px;
 }
 
 body {
-  background-color: var(--color-cream);
-  color: var(--color-ink);
+  background-color: var(--color-folha);
+  color: var(--color-tinta);
   font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-cream);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-gold);
-  border-radius: 3px;
+h1, h2, h3 {
+  font-family: var(--font-display);
+  text-wrap: balance;
 }
 
-/* GSAP initial state - evita flash */
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-mata);
+  outline-offset: 3px;
+}
+
+.on-dark :focus-visible,
+.on-dark:focus-visible {
+  outline-color: var(--color-ouro-claro);
+}
+
+::selection {
+  background: var(--color-mata);
+  color: #ffffff;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* GSAP: estado inicial dos elementos animados no carregamento */
 .gsap-hidden {
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .gsap-hidden {
+    opacity: 1;
+    transform: none;
+  }
 }

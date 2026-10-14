@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { WHATSAPP_URL } from '@/lib/contact'
 
 const links = [
   { label: 'Espaço', href: '#espaco' },
@@ -13,142 +14,118 @@ const links = [
 ]
 
 export default function Navbar() {
-  const navRef = useRef<HTMLElement>(null)
-  const logoRef = useRef<HTMLAnchorElement>(null)
-  const linksRef = useRef<HTMLDivElement>(null)
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
+    onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
   useEffect(() => {
-    const init = async () => {
-      const { gsap } = await import('gsap')
-
-      // Navbar desliza de cima
-      gsap.fromTo(
-        navRef.current,
-        { opacity: 0, y: -24 },
-        { opacity: 1, y: 0, duration: 0.7, ease: 'power3.out', delay: 0.1 }
-      )
-
-      // Logo aparece com scale + fade
-      gsap.fromTo(
-        logoRef.current,
-        { opacity: 0, scale: 0.75, filter: 'blur(6px)' },
-        { opacity: 1, scale: 1, filter: 'blur(0px)', duration: 0.9, ease: 'back.out(1.7)', delay: 0.4 }
-      )
-
-      // Links entram em stagger
-      if (linksRef.current) {
-        gsap.fromTo(
-          linksRef.current.children,
-          { opacity: 0, y: -10 },
-          { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', stagger: 0.08, delay: 0.6 }
-        )
-      }
+    if (!open) return
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setOpen(false)
     }
-    init()
-  }, [])
+    document.addEventListener('keydown', onKeyDown)
+    return () => document.removeEventListener('keydown', onKeyDown)
+  }, [open])
+
+  // sobre o hero escuro a navbar é transparente; ao rolar (ou com o menu aberto) vira clara
+  const light = scrolled || open
 
   return (
     <header
-      ref={navRef}
-      style={{ opacity: 0 }}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
-        scrolled
-          ? 'bg-[#F8F4EE]/96 backdrop-blur-md border-b border-[#E5DDD0] shadow-sm'
-          : 'bg-transparent'
+        'fixed top-0 left-0 right-0 z-50 transition-colors duration-300',
+        light
+          ? 'bg-folha/95 backdrop-blur-md border-b border-linha'
+          : 'bg-transparent on-dark'
       )}
     >
-      <div className="max-w-6xl mx-auto px-6 h-[68px] flex items-center justify-between">
-
-        {/* Logo */}
-        <a ref={logoRef} href="#" className="flex items-center gap-2.5 group" style={{ opacity: 0 }}>
-          <div className="w-9 h-9 relative flex-shrink-0">
-            <Image
-              src="/logo-recanto.svg"
-              alt="Recanto Vila Rica"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-          <span className={cn(
-            'font-black text-base tracking-tight transition-colors duration-300 leading-tight',
-            scrolled ? 'text-[#161616]' : 'text-white'
-          )}>
-            Recanto{' '}
-            <span className="text-[#C6A15B]">Vila Rica</span>
+      <div className="max-w-6xl mx-auto px-5 sm:px-6 h-[68px] flex items-center justify-between gap-4">
+        <a href="#" className="flex items-center gap-2.5 min-h-11">
+          <span className="w-10 h-10 relative flex-shrink-0">
+            <Image src="/logo-recanto.svg" alt="" fill className="object-contain" priority />
+          </span>
+          <span
+            className={cn(
+              'font-display font-semibold text-xl leading-none transition-colors duration-300',
+              light ? 'text-tinta' : 'text-white'
+            )}
+          >
+            Recanto Vila Rica
           </span>
         </a>
 
-        {/* Desktop links */}
-        <div ref={linksRef} className="hidden md:flex items-center gap-7">
+        <nav aria-label="Principal" className="hidden lg:flex items-center gap-1">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               className={cn(
-                'text-sm font-medium transition-colors duration-300',
-                scrolled
-                  ? 'text-[#6F6A63] hover:text-[#161616]'
-                  : 'text-white/70 hover:text-white'
+                'px-3 py-2 rounded-md text-[15px] font-medium transition-colors duration-200',
+                light ? 'text-pedra hover:text-tinta hover:bg-musgo' : 'text-white/75 hover:text-white'
               )}
             >
               {l.label}
             </a>
           ))}
           <a
-            href="https://wa.me/5535999718824"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#C6A15B] text-white text-sm font-semibold hover:bg-[#A07C2A] transition-all duration-200 shadow-md hover:shadow-lg hover:shadow-[#C6A15B]/20"
+            className={cn(
+              'ml-3 inline-flex items-center min-h-11 px-5 rounded-lg text-[15px] font-bold transition-colors duration-200',
+              light ? 'bg-mata text-white hover:bg-mata-funda' : 'bg-ouro-claro text-tinta hover:bg-white'
+            )}
           >
-            Reservar agora
+            Reservar pelo WhatsApp
           </a>
-        </div>
+        </nav>
 
-        {/* Mobile toggle */}
         <button
+          type="button"
           className={cn(
-            'md:hidden p-2 transition-colors duration-300',
-            scrolled ? 'text-[#161616]' : 'text-white'
+            'lg:hidden w-11 h-11 -mr-2 inline-flex items-center justify-center rounded-lg transition-colors duration-200',
+            light ? 'text-tinta hover:bg-musgo' : 'text-white hover:bg-white/10'
           )}
-          onClick={() => setOpen(!open)}
-          aria-label="Menu"
+          onClick={() => setOpen((o) => !o)}
+          aria-expanded={open}
+          aria-controls="menu-mobile"
+          aria-label={open ? 'Fechar menu' : 'Abrir menu'}
         >
-          {open ? <X size={22} /> : <Menu size={22} />}
+          {open ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>
 
-      {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-[#F8F4EE] border-b border-[#E5DDD0] px-6 py-5 flex flex-col gap-4">
+        <nav
+          id="menu-mobile"
+          aria-label="Principal"
+          className="lg:hidden bg-folha border-b border-linha px-5 pb-5 pt-1 flex flex-col max-h-[calc(100svh-68px)] overflow-y-auto"
+        >
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="text-sm font-medium text-[#6F6A63] hover:text-[#161616] py-1"
+              className="flex items-center min-h-12 text-lg text-tinta-2 border-b border-linha"
             >
               {l.label}
             </a>
           ))}
           <a
-            href="https://wa.me/5535999718824"
+            href={WHATSAPP_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-[#C6A15B] text-white text-sm font-semibold"
+            className="mt-5 inline-flex items-center justify-center min-h-12 rounded-lg bg-mata text-white text-base font-bold"
           >
-            Reservar agora
+            Reservar pelo WhatsApp
           </a>
-        </div>
+        </nav>
       )}
     </header>
   )
