@@ -1,64 +1,84 @@
-import { MapPin, Phone, MessageCircle } from 'lucide-react'
-import { INSTAGRAM_HANDLE, INSTAGRAM_URL, MAPS_URL, PHONE_DISPLAY, PHONE_TEL, WHATSAPP_URL } from '@/lib/contact'
+import { Logo } from '@/components/brand/Logo'
+import { APP_LOGIN_URL, APP_SIGNUP_URL, EMAIL_DISPLAY, EMAIL_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '@/lib/contact'
 
-function InstagramIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
-      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
-    </svg>
-  )
-}
+const linkClass = 'inline-flex items-center min-h-11 text-[15px] text-nevoa-texto hover:text-white transition-colors duration-200'
 
-const linkClass =
-  'flex items-center gap-3 min-h-11 text-[15px] text-white/70 hover:text-white transition-colors duration-200'
+const sections = [
+  { label: 'Como funciona', href: '#como-funciona' },
+  { label: 'Recursos', href: '#recursos' },
+  { label: 'Quem usa', href: '#quem-usa' },
+  { label: 'Planos', href: '#planos' },
+  { label: 'Dúvidas', href: '#duvidas' },
+]
 
 export default function Footer() {
   const year = new Date().getFullYear()
 
   return (
-    <footer className="on-dark bg-mata-noite text-white pt-14 pb-[calc(2rem+env(safe-area-inset-bottom))]">
+    <footer className="on-dark bg-noite text-white pt-14 pb-[calc(2rem+env(safe-area-inset-bottom))]">
       <div className="max-w-6xl mx-auto px-5 sm:px-6">
-        <div className="grid gap-10 md:grid-cols-3 mb-12">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] mb-12">
           <div>
-            <p className="font-display font-semibold text-2xl">Recanto Vila Rica</p>
-            <p className="mt-3 text-[15px] leading-relaxed text-white/60 max-w-xs">
-              Espaço de festas com salão, piscina e área kids em Lavras, MG.
+            <Logo tone="dark" className="h-9 w-auto" />
+            <p className="mt-4 text-[15px] leading-relaxed text-nevoa-texto max-w-xs">
+              Agenda, contrato e pagamento para salões de festa.
             </p>
           </div>
 
-          <div>
-            <h2 className="font-sans text-[15px] font-bold text-white/90 mb-2">Contato</h2>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
-              <MessageCircle size={16} aria-hidden="true" />
-              WhatsApp {PHONE_DISPLAY}
-            </a>
-            <a href={PHONE_TEL} className={linkClass}>
-              <Phone size={16} aria-hidden="true" />
-              Ligar {PHONE_DISPLAY}
-            </a>
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
-              <InstagramIcon />
-              {INSTAGRAM_HANDLE}
-            </a>
-          </div>
+          <nav aria-label="Seções da página">
+            <h2 className="font-sans text-[15px] font-bold text-white mb-1">Na página</h2>
+            <ul>
+              {sections.map((s) => (
+                <li key={s.href}>
+                  <a href={s.href} className={linkClass}>
+                    {s.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-          <div>
-            <h2 className="font-sans text-[15px] font-bold text-white/90 mb-2">Endereço</h2>
-            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className={`${linkClass} items-start py-2`}>
-              <MapPin size={16} aria-hidden="true" className="flex-shrink-0 mt-1" />
-              <span className="leading-relaxed">
-                Rua Bernardino Antônio Tomás, 21
-                <br />
-                Jardim Vila Rica, Lavras – MG
-              </span>
-            </a>
-          </div>
+          <nav aria-label="App">
+            <h2 className="font-sans text-[15px] font-bold text-white mb-1">App</h2>
+            <ul>
+              <li>
+                <a href={APP_LOGIN_URL} className={linkClass}>
+                  Entrar
+                </a>
+              </li>
+              <li>
+                <a href={APP_SIGNUP_URL} className={linkClass}>
+                  Criar conta
+                </a>
+              </li>
+            </ul>
+          </nav>
+
+          {(WHATSAPP_URL || EMAIL_URL) && (
+            <div>
+              <h2 className="font-sans text-[15px] font-bold text-white mb-1">Contato</h2>
+              <ul>
+                {WHATSAPP_URL && (
+                  <li>
+                    <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className={linkClass}>
+                      WhatsApp {WHATSAPP_DISPLAY}
+                    </a>
+                  </li>
+                )}
+                {EMAIL_URL && (
+                  <li>
+                    <a href={EMAIL_URL} className={`${linkClass} break-all`}>
+                      {EMAIL_DISPLAY}
+                    </a>
+                  </li>
+                )}
+              </ul>
+            </div>
+          )}
         </div>
 
-        <div className="border-t border-white/10 pt-6 text-sm text-white/50">
-          <p>© {year} Recanto Vila Rica. Todos os direitos reservados.</p>
+        <div className="border-t border-white/10 pt-6 text-sm text-nevoa-texto">
+          <p>© {year} Festário</p>
         </div>
       </div>
     </footer>

@@ -4,22 +4,25 @@ import { useEffect, useState } from 'react'
 import { MessageCircle } from 'lucide-react'
 import { WHATSAPP_URL } from '@/lib/contact'
 
+/** Atalho para o WhatsApp comercial do Festário. Some quando não há número configurado. */
 export default function WhatsAppFloat() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 300)
+    const onScroll = () => setVisible(window.scrollY > 600)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
+
+  if (!WHATSAPP_URL) return null
 
   return (
     <a
       href={WHATSAPP_URL}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Falar no WhatsApp"
+      aria-label="Falar com o Festário no WhatsApp"
       tabIndex={visible ? 0 : -1}
       aria-hidden={!visible}
       // verde do WhatsApp mantido de propósito: reconhecimento imediato do canal
