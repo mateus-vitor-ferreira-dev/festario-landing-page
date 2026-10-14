@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next'
 import { Alegreya, Alegreya_Sans } from 'next/font/google'
+import { APP_URL, SITE_URL } from '@/lib/contact'
 import './globals.css'
 
 const alegreya = Alegreya({
@@ -17,97 +18,94 @@ const alegreyaSans = Alegreya_Sans({
 })
 
 export const viewport: Viewport = {
-  themeColor: '#133428',
+  themeColor: '#141936',
   viewportFit: 'cover',
 }
 
-const siteUrl = 'https://recanto-vila-rica-landing.vercel.app'
+const title = 'Festário: reservas para salões de festa'
+const description =
+  'Agenda com datas livres, planos por dia da semana, contrato em PDF e pagamento por cartão ou PIX. O cliente reserva sozinho e o dono do salão acompanha tudo pelo painel.'
 
 export const metadata: Metadata = {
-  title: 'Recanto Vila Rica — Espaço para Eventos em Lavras, MG',
-  description:
-    'O espaço ideal para aniversários, casamentos, formaturas e confraternizações em Lavras, MG. Reserve pelo WhatsApp: (35) 99971-8824.',
-  metadataBase: new URL(siteUrl),
-  alternates: { canonical: siteUrl },
+  title,
+  description,
+  applicationName: 'Festário',
+  metadataBase: new URL(SITE_URL),
+  alternates: { canonical: '/' },
   keywords: [
-    'espaço para eventos Lavras',
-    'salão de festas Lavras MG',
-    'aniversário Lavras',
-    'casamento Lavras',
-    'formatura Lavras',
-    'Recanto Vila Rica',
-    'aluguel de espaço para festa Lavras',
+    'sistema de reservas para salão de festas',
+    'agenda de salão de festas',
+    'gestão de espaço de eventos',
+    'reserva online de salão',
+    'contrato de locação de salão',
+    'Festário',
   ],
   openGraph: {
-    title: 'Recanto Vila Rica — Espaço para Eventos em Lavras, MG',
-    description:
-      'Celebre momentos especiais com sofisticação e acolhimento. Aniversários, casamentos, formaturas e mais. Reserve agora pelo WhatsApp.',
-    url: siteUrl,
-    siteName: 'Recanto Vila Rica',
+    title,
+    description,
+    url: '/',
+    siteName: 'Festário',
     locale: 'pt_BR',
     type: 'website',
     images: [
       {
-        url: '/assets/salao.webp',
+        url: '/og-festario.png',
         width: 1200,
         height: 630,
-        alt: 'Salão principal do Recanto Vila Rica em Lavras, MG',
+        alt: 'Festário: calendário de reservas com varal de bandeirinhas e uma data confirmada',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Recanto Vila Rica — Espaço para Eventos em Lavras, MG',
-    description: 'Celebre momentos especiais com sofisticação e acolhimento em Lavras, MG.',
-    images: ['/assets/salao.webp'],
+    title,
+    description,
+    images: ['/og-festario.png'],
   },
   robots: { index: true, follow: true },
 }
 
-const localBusinessSchema = {
+// Sem avaliações nem preço: ainda não existem, então não entram nos dados estruturados.
+const structuredData = {
   '@context': 'https://schema.org',
-  '@type': 'EventVenue',
-  name: 'Recanto Vila Rica',
-  description:
-    'Espaço para eventos em Lavras, MG. Ideal para aniversários, casamentos, formaturas e confraternizações.',
-  url: siteUrl,
-  telephone: '+55-35-99971-8824',
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Rua Bernardino Antônio Tomás, 21',
-    addressLocality: 'Lavras',
-    addressRegion: 'MG',
-    postalCode: '37203-775',
-    addressCountry: 'BR',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: -21.2445,
-    longitude: -44.9997,
-  },
-  sameAs: ['https://instagram.com/recanto.vilarica'],
-  openingHoursSpecification: {
-    '@type': 'OpeningHoursSpecification',
-    dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-    opens: '08:00',
-    closes: '23:00',
-  },
-  priceRange: 'R$649 - R$999',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
+      name: 'Festário',
+      url: SITE_URL,
+      logo: `${SITE_URL}/brand/festario-simbolo.svg`,
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Festário',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      url: APP_URL,
+      description,
+      inLanguage: 'pt-BR',
+      publisher: { '@id': `${SITE_URL}/#organization` },
+      featureList: [
+        'Calendário de disponibilidade com datas bloqueadas e feriados',
+        'Planos com preço por dia da semana',
+        'Reserva online com cotação',
+        'Contrato em PDF com aceite',
+        'Pagamento por cartão e PIX',
+        'Negociação por chat com proposta de preço',
+        'Promoções de indicação, fidelidade e sorteio',
+        'Painel do dono com reservas, clientes, campanhas e espaços',
+      ],
+    },
+  ],
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${alegreya.variable} ${alegreyaSans.variable}`}>
-      <head>
-        {/* Sem JavaScript, o conteúdo do hero não pode ficar invisível esperando o GSAP */}
-        <noscript>
-          <style>{'.gsap-hidden{opacity:1!important;transform:none!important}'}</style>
-        </noscript>
-      </head>
       <body>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
         {children}
       </body>
