@@ -1,5 +1,25 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+import { Alegreya, Alegreya_Sans } from 'next/font/google'
 import './globals.css'
+
+const alegreya = Alegreya({
+  subsets: ['latin'],
+  style: ['normal', 'italic'],
+  variable: '--font-alegreya',
+  display: 'swap',
+})
+
+const alegreyaSans = Alegreya_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '800'],
+  variable: '--font-alegreya-sans',
+  display: 'swap',
+})
+
+export const viewport: Viewport = {
+  themeColor: '#133428',
+  viewportFit: 'cover',
+}
 
 const siteUrl = 'https://recanto-vila-rica-landing.vercel.app'
 
@@ -77,17 +97,12 @@ const localBusinessSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${alegreya.variable} ${alegreyaSans.variable}`}>
       <head>
-        {/* Preload da imagem LCP — primeira imagem visível da galeria */}
-        <link
-          rel="preload"
-          as="image"
-          href="/assets/salao.webp"
-          type="image/webp"
-        />
-        {/* Preload da logo SVG */}
-        <link rel="preload" as="image" href="/logo-recanto.svg" type="image/svg+xml" />
+        {/* Sem JavaScript, o conteúdo do hero não pode ficar invisível esperando o GSAP */}
+        <noscript>
+          <style>{'.gsap-hidden{opacity:1!important;transform:none!important}'}</style>
+        </noscript>
       </head>
       <body>
         <script

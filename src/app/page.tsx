@@ -1,6 +1,5 @@
 import Navbar from '@/components/landing/Navbar'
 import HeroSection from '@/components/landing/HeroSection'
-import MarqueeBrand from '@/components/landing/MarqueeBrand'
 import SpacesSection from '@/components/landing/SpacesSection'
 import PricingSection from '@/components/landing/PricingSection'
 import PromotionsSection from '@/components/landing/PromotionsSection'
@@ -15,7 +14,6 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <HeroSection />
-        <MarqueeBrand />
         <SpacesSection />
         <PricingSection />
         <PromotionsSection />
