@@ -52,7 +52,7 @@ export const metadata: Metadata = {
         url: '/og-festario.png',
         width: 1200,
         height: 630,
-        alt: 'Festário: calendário de reservas com varal de bandeirinhas e uma data confirmada',
+        alt: 'Logotipo do Festário sob um varal de bandeirinhas, com o slogan Data marcada, festa garantida.',
       },
     ],
   },

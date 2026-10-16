@@ -48,8 +48,8 @@ Uma rota (`/`), estática, regenerada uma vez por dia (`revalidate = 86400`) par
 Tokens e SVGs vêm do kit em `recanto-vila-rica-web/docs/marca` (guia completo lá). Aqui:
 
 - `src/app/globals.css`: paleta no `@theme` do Tailwind (anil, anil-escuro, anil-claro, milho, pitanga, névoa, papel, grafite, noite). **Milho é só decorativo** sobre fundo claro (1,84:1).
-- `public/brand/`: cópia dos SVGs do kit. `src/app/icon.svg` é o `festario-favicon.svg`.
-- `src/components/brand/Logo.tsx`: logotipo e símbolo inline, para trocar de tom com a navbar.
+- `public/brand/`: cópia dos SVGs do kit. `src/app/icon.svg` é o `festario-favicon.svg`, `src/app/apple-icon.png` é o ícone de app e `public/og-festario.png` é a `og-image` do kit.
+- `src/components/brand/Logo.tsx`: logotipo e símbolo inline, para trocar de tom com a navbar. A geometria vem de `geometry.ts`, cópia do arquivo gerado no web.
 - `public/og-festario.png`: imagem de Open Graph (1200×630), capturada do próprio hero.
 - Tipografia: Alegreya (títulos) e Alegreya Sans (texto) via `next/font`.
 
