@@ -7,7 +7,7 @@
 <p><strong>A página de apresentação do Festário, a plataforma de reservas para salões de festa: fala com o dono do salão e encaminha quem vai fazer a festa para o app</strong></p>
 
 <p>
-  <img src="https://github.com/mateus-vitor-ferreira-dev/recanto-vila-rica-landing-page/actions/workflows/ci.yml/badge.svg" alt="CI"/>
+  <img src="https://github.com/mateus-vitor-ferreira-dev/festario-landing-page/actions/workflows/ci.yml/badge.svg" alt="CI"/>
   &nbsp;
   <img src="https://img.shields.io/badge/Next.js-16.2-000000?style=flat-square&logo=nextdotjs&logoColor=white" alt="Next.js"/>
   <img src="https://img.shields.io/badge/React-19.2-61DAFB?style=flat-square&logo=react&logoColor=black" alt="React"/>
@@ -21,7 +21,7 @@
 
 ## O que é
 
-O **Festário** (festa + o *-ário* de calendário) organiza as reservas de salões de festa: calendário com datas livres e bloqueadas, planos com preço por dia da semana, cotação, contrato em PDF com aceite, pagamento por cartão (Stripe) ou PIX, negociação por chat, promoções e um painel para o dono. O app fica em [`recanto-vila-rica-web`](https://github.com/mateus-vitor-ferreira-dev/recanto-vila-rica-web) e a API em `recanto-vila-rica-api`.
+O **Festário** (festa + o *-ário* de calendário) organiza as reservas de salões de festa: calendário com datas livres e bloqueadas, planos com preço por dia da semana, cotação, contrato em PDF com aceite, pagamento por cartão (Stripe) ou PIX, negociação por chat, promoções e um painel para o dono. O app fica em [`festario-web`](https://github.com/mateus-vitor-ferreira-dev/festario-web) e a API em `festario-api`.
 
 Esta landing já foi o site de um salão só, o **Recanto Vila Rica** (Lavras/MG). Hoje ela apresenta a plataforma, com foco no **dono de salão**, e mantém o Recanto como vitrine: o primeiro salão que usa o Festário, com as fotos reais do espaço.
 
@@ -45,7 +45,7 @@ Uma rota (`/`), estática, regenerada uma vez por dia (`revalidate = 86400`) par
 
 ## Marca
 
-Tokens e SVGs vêm do kit em `recanto-vila-rica-web/docs/marca` (guia completo lá). Aqui:
+Tokens e SVGs vêm do kit em `festario-web/docs/marca` (guia completo lá). Aqui:
 
 - `src/app/globals.css`: paleta no `@theme` do Tailwind (anil, anil-escuro, anil-claro, milho, pitanga, névoa, papel, grafite, noite). **Milho é só decorativo** sobre fundo claro (1,84:1).
 - `public/brand/`: cópia dos SVGs do kit. `src/app/icon.svg` é o `festario-favicon.svg`.
@@ -76,7 +76,7 @@ cp .env.example .env.local   # opcional
 npm run dev                  # http://localhost:3000
 ```
 
-O app (`recanto-vila-rica-web`) roda à parte, por padrão em `http://localhost:5173`.
+O app (`festario-web`) roda à parte, por padrão em `http://localhost:5173`.
 
 | Script | O que faz |
 |---|---|
