@@ -1,4 +1,4 @@
-import { APP_SIGNUP_URL, OWNER_CTA_PROPS } from '@/lib/contact'
+import { APP_SALONS_URL, OWNER_CTA_PROPS } from '@/lib/contact'
 import BookingCard from './BookingCard'
 
 export default function HeroSection() {
@@ -22,7 +22,7 @@ export default function HeroSection() {
               Quero o Festário no meu salão
             </a>
             <a
-              href={APP_SIGNUP_URL}
+              href={APP_SALONS_URL}
               className="inline-flex items-center justify-center min-h-13 px-7 rounded-lg border border-white/35 text-white text-base font-medium hover:bg-white/10 transition-colors duration-200"
             >
               Quero reservar uma festa

@@ -7,6 +7,8 @@
 export const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:5173').replace(/\/+$/, '')
 export const APP_SIGNUP_URL = `${APP_URL}/cadastro`
 export const APP_LOGIN_URL = `${APP_URL}/login`
+/** Vitrine pública de salões: quem quer reservar vê os salões antes de criar conta. */
+export const APP_SALONS_URL = `${APP_URL}/saloes`
 
 /** Endereço público desta landing: canonical, Open Graph, sitemap e robots. */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://recanto-vila-rica-landing.vercel.app').replace(
