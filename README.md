@@ -35,7 +35,7 @@ Uma rota (`/`), estática, regenerada uma vez por dia (`revalidate = 86400`) par
 | `HeroSection` + `BookingCard` | | Título, CTA do dono e do cliente, e o calendário com varal de bandeirinhas (o mesmo do login do app). É o único movimento da página: as bandeirinhas caem no lugar |
 | `HowItWorksSection` | `#como-funciona` | Quatro passos do dono: convite, configuração, reserva do cliente, painel |
 | `FeaturesSection` | `#recursos` | Recursos reais em três grupos, mais o que vem em breve (vitrine de salões) |
-| `ForClientsSection` | | Bloco curto para quem vai fazer a festa, com links para cadastro e login no app |
+| `ForClientsSection` | | Bloco curto para quem vai fazer a festa, com links para a vitrine de salões e o login no app |
 | `ShowcaseSection` | `#quem-usa` | Recanto Vila Rica: galeria com as fotos do salão e link para o Instagram dele |
 | `PlansSection` | `#planos` | Gratuito, Inicial e Profissional (FREE, STARTER, PRO no sistema), sem preço: "Preço em breve" |
 | `FaqSection` | `#duvidas` | Perguntas curtas em `<details>` (funciona sem JavaScript) |
@@ -59,7 +59,7 @@ Todas são `NEXT_PUBLIC_*`, embutidas no build. Copie `.env.example` para `.env.
 
 | Variável | Padrão | Uso |
 |---|---|---|
-| `NEXT_PUBLIC_APP_URL` | `http://localhost:5173` | App de reservas: "Quero reservar uma festa" (`/cadastro`), "Entrar" (`/login`) |
+| `NEXT_PUBLIC_APP_URL` | `http://localhost:5173` | App de reservas: "Quero reservar uma festa" (`/saloes`, a vitrine pública), "Entrar" (`/login`), "Criar conta" (`/cadastro`) |
 | `NEXT_PUBLIC_SITE_URL` | `https://recanto-vila-rica-landing.vercel.app` | Canonical, Open Graph, `sitemap.xml`, `robots.txt` |
 | `NEXT_PUBLIC_CONTACT_WHATSAPP` | `5535997460058` | WhatsApp comercial: CTA do dono, contato, rodapé, botão flutuante. A mensagem vai pré-preenchida |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | nenhum | E-mail comercial (ainda não existe). Definido, aparece no contato e no rodapé |

@@ -1,4 +1,4 @@
-import { APP_LOGIN_URL, APP_SIGNUP_URL } from '@/lib/contact'
+import { APP_LOGIN_URL, APP_SALONS_URL } from '@/lib/contact'
 
 export default function ForClientsSection() {
   return (
@@ -16,7 +16,7 @@ export default function ForClientsSection() {
           </div>
           <div className="flex flex-col sm:flex-row md:flex-col lg:flex-row gap-3">
             <a
-              href={APP_SIGNUP_URL}
+              href={APP_SALONS_URL}
               className="inline-flex items-center justify-center min-h-12 px-6 rounded-lg bg-anil text-white text-base font-bold hover:bg-anil-escuro transition-colors duration-200"
             >
               Quero reservar uma festa
