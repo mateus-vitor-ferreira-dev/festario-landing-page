@@ -1,12 +1,17 @@
 import Navbar from '@/components/landing/Navbar'
 import HeroSection from '@/components/landing/HeroSection'
-import SpacesSection from '@/components/landing/SpacesSection'
-import PricingSection from '@/components/landing/PricingSection'
-import PromotionsSection from '@/components/landing/PromotionsSection'
-import LocationSection from '@/components/landing/LocationSection'
+import HowItWorksSection from '@/components/landing/HowItWorksSection'
+import FeaturesSection from '@/components/landing/FeaturesSection'
+import ForClientsSection from '@/components/landing/ForClientsSection'
+import ShowcaseSection from '@/components/landing/ShowcaseSection'
+import PlansSection from '@/components/landing/PlansSection'
+import FaqSection from '@/components/landing/FaqSection'
 import CTASection from '@/components/landing/CTASection'
 import Footer from '@/components/landing/Footer'
 import WhatsAppFloat from '@/components/landing/WhatsAppFloat'
+
+// O calendário do hero mostra o mês corrente: a página estática é regenerada uma vez por dia.
+export const revalidate = 86400
 
 export default function LandingPage() {
   return (
@@ -14,10 +19,12 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <HeroSection />
-        <SpacesSection />
-        <PricingSection />
-        <PromotionsSection />
-        <LocationSection />
+        <HowItWorksSection />
+        <FeaturesSection />
+        <ForClientsSection />
+        <ShowcaseSection />
+        <PlansSection />
+        <FaqSection />
         <CTASection />
       </main>
       <Footer />

@@ -1,16 +1,17 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import Image from 'next/image'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { WHATSAPP_URL } from '@/lib/contact'
+import { APP_LOGIN_URL, OWNER_CTA_PROPS } from '@/lib/contact'
+import { Logo } from '@/components/brand/Logo'
 
 const links = [
-  { label: 'Espaço', href: '#espaco' },
+  { label: 'Como funciona', href: '#como-funciona' },
+  { label: 'Recursos', href: '#recursos' },
+  { label: 'Quem usa', href: '#quem-usa' },
   { label: 'Planos', href: '#planos' },
-  { label: 'Promoções', href: '#promocoes' },
-  { label: 'Localização', href: '#localizacao' },
+  { label: 'Dúvidas', href: '#duvidas' },
 ]
 
 export default function Navbar() {
@@ -40,24 +41,12 @@ export default function Navbar() {
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-colors duration-300',
-        light
-          ? 'bg-folha/95 backdrop-blur-md border-b border-linha'
-          : 'bg-transparent on-dark'
+        light ? 'bg-nevoa/95 backdrop-blur-md border-b border-linha' : 'bg-transparent on-dark'
       )}
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-6 h-[68px] flex items-center justify-between gap-4">
-        <a href="#" className="flex items-center gap-2.5 min-h-11">
-          <span className="w-10 h-10 relative flex-shrink-0">
-            <Image src="/logo-recanto.svg" alt="" fill className="object-contain" priority />
-          </span>
-          <span
-            className={cn(
-              'font-display font-semibold text-xl leading-none transition-colors duration-300',
-              light ? 'text-tinta' : 'text-white'
-            )}
-          >
-            Recanto Vila Rica
-          </span>
+        <a href="#" className="flex items-center min-h-11" aria-label="Festário, início da página">
+          <Logo tone={light ? 'light' : 'dark'} title="" className="h-8 w-auto" />
         </a>
 
         <nav aria-label="Principal" className="hidden lg:flex items-center gap-1">
@@ -66,23 +55,30 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               className={cn(
-                'px-3 py-2 rounded-md text-[15px] font-medium transition-colors duration-200',
-                light ? 'text-pedra hover:text-tinta hover:bg-musgo' : 'text-white/75 hover:text-white'
+                'inline-flex items-center min-h-11 px-3 rounded-md text-[15px] font-medium transition-colors duration-200',
+                light ? 'text-grafite hover:text-anil-escuro hover:bg-nevoa-funda' : 'text-nevoa-texto hover:text-white'
               )}
             >
               {l.label}
             </a>
           ))}
           <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={APP_LOGIN_URL}
             className={cn(
-              'ml-3 inline-flex items-center min-h-11 px-5 rounded-lg text-[15px] font-bold transition-colors duration-200',
-              light ? 'bg-mata text-white hover:bg-mata-funda' : 'bg-ouro-claro text-tinta hover:bg-white'
+              'ml-2 inline-flex items-center min-h-11 px-4 rounded-lg text-[15px] font-bold transition-colors duration-200',
+              light ? 'text-anil hover:bg-nevoa-funda' : 'text-white hover:bg-white/10'
             )}
           >
-            Reservar pelo WhatsApp
+            Entrar
+          </a>
+          <a
+            {...OWNER_CTA_PROPS}
+            className={cn(
+              'ml-1 inline-flex items-center min-h-11 px-5 rounded-lg text-[15px] font-bold transition-colors duration-200',
+              light ? 'bg-anil text-white hover:bg-anil-escuro' : 'bg-anil-claro text-noite hover:bg-white'
+            )}
+          >
+            Quero o Festário
           </a>
         </nav>
 
@@ -90,14 +86,14 @@ export default function Navbar() {
           type="button"
           className={cn(
             'lg:hidden w-11 h-11 -mr-2 inline-flex items-center justify-center rounded-lg transition-colors duration-200',
-            light ? 'text-tinta hover:bg-musgo' : 'text-white hover:bg-white/10'
+            light ? 'text-anil-escuro hover:bg-nevoa-funda' : 'text-white hover:bg-white/10'
           )}
           onClick={() => setOpen((o) => !o)}
           aria-expanded={open}
           aria-controls="menu-mobile"
           aria-label={open ? 'Fechar menu' : 'Abrir menu'}
         >
-          {open ? <X size={24} /> : <Menu size={24} />}
+          {open ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
         </button>
       </div>
 
@@ -105,25 +101,29 @@ export default function Navbar() {
         <nav
           id="menu-mobile"
           aria-label="Principal"
-          className="lg:hidden bg-folha border-b border-linha px-5 pb-5 pt-1 flex flex-col max-h-[calc(100svh-68px)] overflow-y-auto"
+          className="lg:hidden bg-nevoa border-b border-linha px-5 pb-5 pt-1 flex flex-col max-h-[calc(100svh-68px)] overflow-y-auto"
         >
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="flex items-center min-h-12 text-lg text-tinta-2 border-b border-linha"
+              className="flex items-center min-h-12 text-lg text-anil-escuro border-b border-linha"
             >
               {l.label}
             </a>
           ))}
           <a
-            href={WHATSAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center justify-center min-h-12 rounded-lg bg-mata text-white text-base font-bold"
+            {...OWNER_CTA_PROPS}
+            className="mt-5 inline-flex items-center justify-center min-h-12 rounded-lg bg-anil text-white text-base font-bold"
           >
-            Reservar pelo WhatsApp
+            Quero o Festário no meu salão
+          </a>
+          <a
+            href={APP_LOGIN_URL}
+            className="mt-3 inline-flex items-center justify-center min-h-12 rounded-lg border border-linha bg-papel text-anil text-base font-bold"
+          >
+            Entrar no app
           </a>
         </nav>
       )}
