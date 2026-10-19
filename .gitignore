@@ -33,3 +33,6 @@ next-env.d.ts
 .env
 .env*.local
 *.tsbuildinfo
+
+# Cache local do wrangler dev
+.wrangler/
