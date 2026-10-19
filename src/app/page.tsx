@@ -10,8 +10,8 @@ import CTASection from '@/components/landing/CTASection'
 import Footer from '@/components/landing/Footer'
 import WhatsAppFloat from '@/components/landing/WhatsAppFloat'
 
-// O calendário do hero mostra o mês corrente: a página estática é regenerada uma vez por dia.
-export const revalidate = 86400
+// O calendário do hero mostra o mês corrente. A página é estática, gerada no build; o
+// rebuild diário (.github/workflows/rebuild-diario.yml) a mantém no mês certo.
 
 export default function LandingPage() {
   return (
