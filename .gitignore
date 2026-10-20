@@ -32,4 +32,9 @@ next-env.d.ts
 # Variáveis de ambiente locais
 .env
 .env*.local
+# Valores públicos de produção, embutidos no build (sem segredos)
+!.env.production
 *.tsbuildinfo
+
+# Cache local do wrangler dev
+.wrangler/
