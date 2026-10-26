@@ -25,6 +25,7 @@ const groups: { title: string; icon: LucideIcon; items: { name: string; text: st
     title: 'Conversa e relacionamento',
     icon: MessagesSquare,
     items: [
+      { name: 'Vitrine de salões', text: 'Seu salão aparece para quem procura festa por perto, com logo, fotos e comodidades. O cliente navega sem conta e só entra na hora de reservar.' },
       { name: 'Negociação por chat', text: 'Para pedidos fora do pacote: você manda uma proposta de preço e, aceita, ela vira reserva.' },
       { name: 'Promoções', text: 'Campanhas de indicação, fidelidade e sorteio, aplicadas na reserva.' },
       { name: 'Painel do dono', text: 'Reservas com filtros, clientes, campanhas, feriados e espaços.' },
@@ -60,11 +61,6 @@ export default function FeaturesSection() {
             </div>
           ))}
         </div>
-
-        <p className="mt-12 max-w-2xl text-base leading-relaxed text-grafite">
-          <strong className="font-bold text-anil-escuro">Em breve:</strong> uma vitrine de salões, com os mais perto
-          do cliente primeiro e a logo e as fotos de cada salão.
-        </p>
       </div>
     </section>
   )
