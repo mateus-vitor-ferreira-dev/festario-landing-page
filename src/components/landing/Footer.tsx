@@ -20,7 +20,8 @@ export default function Footer() {
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[minmax(0,1.4fr)_repeat(3,minmax(0,1fr))] mb-12">
           <div>
             <Logo tone="dark" className="h-9 w-auto" />
-            <p className="mt-4 text-[15px] leading-relaxed text-nevoa-texto max-w-xs">
+            <p className="mt-5 font-display font-semibold text-xl text-white">Data marcada, festa garantida.</p>
+            <p className="mt-2 text-[15px] leading-relaxed text-nevoa-texto max-w-xs">
               Agenda, contrato e pagamento para salões de festa.
             </p>
           </div>

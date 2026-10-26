@@ -54,7 +54,7 @@ type DayState = 'free' | 'booked' | 'confirmed'
 const dayClass: Record<DayState, string> = {
   free: 'bg-nevoa-funda text-anil-escuro',
   /* indisponível sem alarmar: apagado e riscado */
-  booked: 'text-[#6b7090] line-through decoration-[#c5c9dc]',
+  booked: 'text-grafite line-through decoration-grafite/40',
   /* a data da festa: anil com anel de milho (o check do símbolo) */
   confirmed: 'bg-anil text-white shadow-[0_0_0_2px_#fff,0_0_0_4px_#f4b41a]',
 }
@@ -120,7 +120,7 @@ export default function BookingCard({ className }: { className?: string }) {
             Livre
           </span>
           <span className="inline-flex items-center gap-[0.45em]">
-            <i className="w-[0.75em] h-[0.75em] rounded-[3px] border border-[#a2a7bd]" />
+            <i className="w-[0.75em] h-[0.75em] rounded-[3px] border border-grafite/50" />
             Reservado
           </span>
           <span className="inline-flex items-center gap-[0.45em]">
@@ -130,8 +130,8 @@ export default function BookingCard({ className }: { className?: string }) {
         </div>
       </div>
 
-      <div className="ticket-in absolute right-[-0.6em] sm:right-[-1.3em] top-0 flex flex-col gap-[0.15em] px-[1.05em] py-[0.8em] rounded-xl bg-[#fdf4dc] text-anil-escuro border border-[#f2d68c] shadow-[0_16px_32px_-12px_rgba(0,0,0,0.5)]">
-        <strong className="text-[max(12px,0.87em)] font-bold text-[#1b6334]">Reserva confirmada</strong>
+      <div className="ticket-in absolute right-[-0.6em] sm:right-[-1.3em] top-0 flex flex-col gap-[0.15em] px-[1.05em] py-[0.8em] rounded-xl bg-milho text-anil-escuro shadow-[0_16px_32px_-12px_rgba(0,0,0,0.5)]">
+        <strong className="text-[max(12px,0.87em)] font-bold">Reserva confirmada</strong>
         <span className="font-display font-semibold text-[1.3em] first-letter:uppercase">{confirmedLabel}</span>
       </div>
     </div>
