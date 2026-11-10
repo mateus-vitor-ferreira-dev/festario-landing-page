@@ -11,7 +11,7 @@ export const APP_LOGIN_URL = `${APP_URL}/login`
 export const APP_SALONS_URL = `${APP_URL}/saloes`
 
 /** Endereço público desta landing: canonical, Open Graph, sitemap e robots. */
-export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://recanto-vila-rica-landing.vercel.app').replace(
+export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://festario.com.br').replace(
   /\/+$/,
   ''
 )

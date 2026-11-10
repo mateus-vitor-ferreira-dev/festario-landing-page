@@ -10,6 +10,12 @@
     // Endereço que não existe mostra a página 404 que o Next gera
     "not_found_handling": "404-page"
   },
+  // O "wrangler deploy" liga os domínios ao worker e o Cloudflare cria o DNS e o certificado.
+  // O www serve a mesma landing; o canonical das páginas aponta para festario.com.br.
+  "routes": [
+    { "pattern": "festario.com.br", "custom_domain": true },
+    { "pattern": "www.festario.com.br", "custom_domain": true }
+  ],
   // Cada branch ganha um link próprio de preview, como na Vercel
   "previews": {}
 }

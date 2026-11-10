@@ -60,7 +60,7 @@ Todas são `NEXT_PUBLIC_*`, embutidas no build. Copie `.env.example` para `.env.
 | Variável | Padrão | Uso |
 |---|---|---|
 | `NEXT_PUBLIC_APP_URL` | `http://localhost:5173` | App de reservas: "Quero reservar uma festa" (`/saloes`, a vitrine pública), "Entrar" (`/login`), "Criar conta" (`/cadastro`) |
-| `NEXT_PUBLIC_SITE_URL` | `https://recanto-vila-rica-landing.vercel.app` | Canonical, Open Graph, `sitemap.xml`, `robots.txt` |
+| `NEXT_PUBLIC_SITE_URL` | `https://festario.com.br` | Canonical, Open Graph, `sitemap.xml`, `robots.txt` |
 | `NEXT_PUBLIC_CONTACT_WHATSAPP` | `5535997460058` | WhatsApp comercial: CTA do dono, contato, rodapé, botão flutuante. A mensagem vai pré-preenchida |
 | `NEXT_PUBLIC_CONTACT_EMAIL` | nenhum | E-mail comercial (ainda não existe). Definido, aparece no contato e no rodapé |
 
