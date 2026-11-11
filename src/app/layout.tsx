@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 
 const title = 'Festário: reservas para salões de festa'
 const description =
-  'Agenda com datas livres, planos por dia da semana, contrato em PDF e pagamento por cartão ou PIX. O cliente reserva sozinho e o dono do salão acompanha tudo pelo painel.'
+  'Agenda com datas livres, planos por dia da semana, contrato em PDF e controle do sinal e dos pagamentos. O cliente reserva sozinho e o dono do salão acompanha tudo pelo painel.'
 
 export const metadata: Metadata = {
   title,
@@ -90,7 +90,7 @@ const structuredData = {
         'Planos com preço por dia da semana',
         'Reserva online com cotação',
         'Contrato em PDF com aceite',
-        'Pagamento por cartão e PIX',
+        'Controle do sinal e dos pagamentos recebidos',
         'Negociação por chat com proposta de preço',
         'Promoções de indicação, fidelidade e sorteio',
         'Painel do dono com reservas, clientes, campanhas e espaços',

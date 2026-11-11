@@ -18,7 +18,7 @@ const groups: { title: string; icon: LucideIcon; items: { name: string; text: st
       { name: 'Planos com preço por dia da semana', text: 'Cada plano tem o seu preço e os dias em que vale: um para segunda a quinta, outro para o fim de semana, do jeito que você cobra.' },
       { name: 'Cotação na hora', text: 'O cliente muda plano, data ou horário e vê o total recalculado.' },
       { name: 'Contrato em PDF com aceite', text: 'O contrato sai com os dados da reserva e o cliente aceita antes de pagar.' },
-      { name: 'Cartão ou PIX', text: 'Pagamento por cartão (Stripe) ou PIX com QR Code na própria página.' },
+      { name: 'Pagamento combinado', text: 'O cliente vê como pagar e paga direto ao salão. Você registra o que recebeu e a reserva se confirma quando o sinal chega.' },
     ],
   },
   {

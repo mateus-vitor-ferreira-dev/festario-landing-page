@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: 'Como o cliente paga?',
-    a: 'Com cartão, pelo Stripe, ou com PIX, pelo QR Code que aparece na própria página da reserva.',
+    a: 'Direto ao salão, do jeito que vocês combinam (PIX, transferência ou dinheiro). Depois de reservar, ele vê as instruções de pagamento do salão; o dono registra o que recebeu e a reserva se confirma quando o sinal chega.',
   },
   {
     q: 'E se o cliente quiser algo fora dos planos?',
