@@ -11,7 +11,7 @@ const steps = [
   },
   {
     title: 'O cliente reserva sozinho',
-    text: 'Ele escolhe uma data livre e o plano, recebe a cotação na hora, lê e aceita o contrato e paga com cartão ou PIX.',
+    text: 'Ele escolhe uma data livre e o plano, recebe a cotação na hora, lê e aceita o contrato e paga o sinal direto ao salão.',
   },
   {
     title: 'Você acompanha pelo painel',
