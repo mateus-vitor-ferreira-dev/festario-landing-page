@@ -8,23 +8,27 @@ const faqs = [
   },
   {
     q: 'Como o meu salão entra no Festário?',
-    a: 'Por convite. A equipe cadastra o salão e manda um link para você criar a conta de dono. A partir daí você configura espaços, planos e datas bloqueadas pelo painel.',
+    a: 'Por convite. A equipe cadastra o salão e manda um link para você criar a conta de dono. A partir daí você configura espaços, pacotes e datas bloqueadas pelo painel.',
   },
   {
     q: 'Posso cadastrar mais de um espaço?',
-    a: 'Pode. Cada espaço do salão tem a sua agenda, os seus planos e as suas datas bloqueadas.',
+    a: 'Pode. Cada espaço do salão tem a sua agenda, os seus pacotes e as suas datas bloqueadas, e a assinatura continua uma só.',
   },
   {
     q: 'Como o cliente paga?',
     a: 'Direto ao salão, do jeito que vocês combinam (PIX, transferência ou dinheiro). Depois de reservar, ele vê as instruções de pagamento do salão; o dono registra o que recebeu e a reserva se confirma quando o sinal chega.',
   },
   {
-    q: 'E se o cliente quiser algo fora dos planos?',
+    q: 'Meu salão cobra por hora (ou por convidado). Funciona?',
+    a: 'Funciona. Cada pacote escolhe como cobrar: valor fixo pela festa, por hora ou por convidado. E os adicionais, como buffet ou hora extra, entram na conta do jeito que você define.',
+  },
+  {
+    q: 'E se o cliente quiser algo fora dos pacotes?',
     a: 'Ele abre uma negociação: um chat com o salão que termina numa proposta de preço e datas. Se ele aceitar, a proposta vira reserva.',
   },
   {
     q: 'Quanto custa?',
-    a: 'Os planos são Gratuito, Inicial e Profissional, e os preços ainda estão sendo definidos. Fale com a gente para entrar.',
+    a: 'R$ 100 por mês por estabelecimento, com quantos espaços você tiver. O primeiro mês é grátis.',
   },
 ]
 

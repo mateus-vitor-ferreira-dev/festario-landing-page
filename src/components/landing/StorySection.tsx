@@ -18,7 +18,7 @@ const steps = [
   },
   {
     title: 'A cotação sai na hora',
-    text: 'Ele troca o plano, a data ou o horário e o total se refaz, com o preço que você definiu para cada dia da semana.',
+    text: 'Ele troca o pacote, a data, o horário ou os adicionais e o total se refaz, do jeito que você cobra: valor fixo, por hora ou por convidado.',
   },
   {
     title: 'Lê e aceita o contrato',

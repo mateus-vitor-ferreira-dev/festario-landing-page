@@ -11,7 +11,7 @@ const links = [
   { label: 'Como funciona', href: '#como-funciona' },
   { label: 'Recursos', href: '#recursos' },
   { label: 'Quem usa', href: '#quem-usa' },
-  { label: 'Planos', href: '#planos' },
+  { label: 'Preço', href: '#preco' },
   { label: 'Dúvidas', href: '#duvidas' },
 ]
 

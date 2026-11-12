@@ -157,9 +157,10 @@ export default function BookingCard({ step = 4, className }: { step?: number; cl
 
         <Sheet show={step === 1}>
           <p className="font-bold mb-[0.35em]">Cotação</p>
-          <Row label="Plano" value="Fim de semana" />
+          <Row label="Pacote" value="Festa completa" />
           <Row label="Data" value={partyLabel} />
-          <Row label="Horário" value="14h às 22h" />
+          <Row label="Horário" value="14h às 20h" />
+          <Row label="Cobrança" value="6 h × R$ 400" />
           <div className="mt-[0.4em] border-t border-linha pt-[0.4em]">
             <Row label="Total" value="R$ 2.400" strong />
           </div>

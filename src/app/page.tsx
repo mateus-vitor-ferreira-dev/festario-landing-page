@@ -3,7 +3,7 @@ import HeroSection from '@/components/landing/HeroSection'
 import HowItWorksSection from '@/components/landing/HowItWorksSection'
 import FeaturesSection from '@/components/landing/FeaturesSection'
 import ForClientsSection from '@/components/landing/ForClientsSection'
-import ShowcaseSection, { RecantoNote } from '@/components/landing/ShowcaseSection'
+import ShowcaseSection from '@/components/landing/ShowcaseSection'
 import StorySection from '@/components/landing/StorySection'
 import PlansSection from '@/components/landing/PlansSection'
 import FaqSection from '@/components/landing/FaqSection'
@@ -25,7 +25,6 @@ export default function LandingPage() {
         <FeaturesSection />
         <ForClientsSection />
         <ShowcaseSection />
-        <RecantoNote />
         <PlansSection />
         <FaqSection />
         <CTASection />

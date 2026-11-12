@@ -7,16 +7,17 @@ const groups: { title: string; icon: LucideIcon; items: { name: string; text: st
     icon: CalendarCheck,
     items: [
       { name: 'Calendário de disponibilidade', text: 'Datas livres, reservadas e bloqueadas: o cliente vê a mesma agenda que você.' },
-      { name: 'Feriados no calendário', text: 'Os feriados nacionais já vêm marcados, e cada plano diz se vale ou não em feriado.' },
-      { name: 'Vários espaços por salão', text: 'Cada espaço com a sua agenda, os seus planos e as suas datas bloqueadas.' },
+      { name: 'Feriados no calendário', text: 'Os feriados nacionais já vêm marcados, e cada pacote diz se vale ou não em feriado.' },
+      { name: 'Vários espaços por salão', text: 'Cada espaço com a sua agenda, os seus pacotes e as suas datas bloqueadas.' },
     ],
   },
   {
     title: 'Reserva e pagamento',
     icon: FileSignature,
     items: [
-      { name: 'Planos com preço por dia da semana', text: 'Cada plano tem o seu preço e os dias em que vale: um para segunda a quinta, outro para o fim de semana, do jeito que você cobra.' },
-      { name: 'Cotação na hora', text: 'O cliente muda plano, data ou horário e vê o total recalculado.' },
+      { name: 'Cobrança do seu jeito', text: 'Cada pacote cobra como o seu salão já cobra: valor fixo pela festa, por hora ou por convidado. Se quiser, um preço para a semana e outro para o fim de semana.' },
+      { name: 'Adicionais', text: 'Buffet, monitor, decoração, hora extra: cada item vem incluso no pacote ou o cliente escolhe à parte, e entra na conta.' },
+      { name: 'Cotação na hora', text: 'O cliente muda pacote, data, horário ou adicionais e vê o total recalculado.' },
       { name: 'Contrato em PDF com aceite', text: 'O contrato sai com os dados da reserva e o cliente aceita antes de pagar.' },
       { name: 'Pagamento combinado', text: 'O cliente vê como pagar e paga direto ao salão. Você registra o que recebeu e a reserva se confirma quando o sinal chega.' },
     ],
