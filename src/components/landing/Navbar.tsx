@@ -7,6 +7,7 @@ import { APP_LOGIN_URL, OWNER_CTA_PROPS } from '@/lib/contact'
 import { Logo } from '@/components/brand/Logo'
 
 const links = [
+  { label: 'Uma reserva', href: '#uma-reserva' },
   { label: 'Como funciona', href: '#como-funciona' },
   { label: 'Recursos', href: '#recursos' },
   { label: 'Quem usa', href: '#quem-usa' },
@@ -16,10 +17,20 @@ const links = [
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [overDark, setOverDark] = useState(true)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 60)
+    // a barra acompanha o que está embaixo dela: escura e translúcida sobre as cenas escuras
+    // (hero e "Uma reserva"), clara sobre o resto
+    const onScroll = () => {
+      setScrolled(window.scrollY > 60)
+      const dark = Array.from(document.querySelectorAll('main section.on-dark')).some((s) => {
+        const r = s.getBoundingClientRect()
+        return r.top <= 34 && r.bottom > 34
+      })
+      setOverDark(dark)
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -34,14 +45,19 @@ export default function Navbar() {
     return () => document.removeEventListener('keydown', onKeyDown)
   }, [open])
 
-  // sobre o hero escuro a navbar é transparente; ao rolar (ou com o menu aberto) vira clara
-  const light = scrolled || open
+  // sobre o topo do hero a barra é transparente; sobre outra cena escura, vidro escuro;
+  // sobre as seções claras (ou com o menu aberto), clara
+  const light = !overDark || open
 
   return (
     <header
       className={cn(
         'fixed top-0 left-0 right-0 z-50 transition-colors duration-300',
-        light ? 'bg-nevoa/95 backdrop-blur-md border-b border-linha' : 'bg-transparent on-dark'
+        light
+          ? 'bg-nevoa/95 backdrop-blur-md border-b border-linha'
+          : scrolled
+            ? 'bg-anil-escuro/75 backdrop-blur-md border-b border-white/10 on-dark'
+            : 'bg-transparent on-dark'
       )}
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-6 h-[68px] flex items-center justify-between gap-4">
