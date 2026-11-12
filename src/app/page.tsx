@@ -4,6 +4,7 @@ import HowItWorksSection from '@/components/landing/HowItWorksSection'
 import FeaturesSection from '@/components/landing/FeaturesSection'
 import ForClientsSection from '@/components/landing/ForClientsSection'
 import ShowcaseSection from '@/components/landing/ShowcaseSection'
+import StorySection from '@/components/landing/StorySection'
 import PlansSection from '@/components/landing/PlansSection'
 import FaqSection from '@/components/landing/FaqSection'
 import CTASection from '@/components/landing/CTASection'
@@ -19,6 +20,7 @@ export default function LandingPage() {
       <Navbar />
       <main>
         <HeroSection />
+        <StorySection />
         <HowItWorksSection />
         <FeaturesSection />
         <ForClientsSection />

@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Celular deitado (ou tela muito baixa): as cenas fixas usam duas colunas para caber. */
+@custom-variant deitado (@media (orientation: landscape) and (max-height: 560px));
+
 /* Festário: mesmos tokens do kit de marca (docs/marca/tokens.css no repositório web).
    Milho é SÓ decorativo sobre fundo claro (1,84:1); texto sobre milho = anil-escuro. */
 @theme {
@@ -66,15 +69,10 @@ p {
   color: #ffffff;
 }
 
-/* Único movimento da página: as bandeirinhas do varal do hero caem no lugar,
-   uma depois da outra, e a data confirmada aparece por último. */
+/* Movimento da página: as bandeirinhas do varal do hero caem no lugar, uma depois da outra,
+   ao carregar. O resto do movimento responde à rolagem (StorySection e ShowcaseSection). */
 @keyframes flag-drop {
   from { transform: translateY(-14px) rotate(-8deg); opacity: 0; }
-  to { transform: none; opacity: 1; }
-}
-
-@keyframes ticket-in {
-  from { transform: translateY(8px); opacity: 0; }
   to { transform: none; opacity: 1; }
 }
 
@@ -84,8 +82,28 @@ p {
   animation: flag-drop 520ms cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
 }
 
-.ticket-in {
-  animation: ticket-in 420ms ease-out 900ms both;
+/* As bandeirinhas do calendário só sobem no varal quando a reserva se confirma. */
+.flag {
+  transform-box: fill-box;
+  transform-origin: 50% 0;
+  transform: translateY(-14px) rotate(-8deg);
+  opacity: 0;
+  transition: transform 520ms cubic-bezier(0.2, 0.9, 0.3, 1.2), opacity 300ms ease-out;
+}
+
+.flag-up {
+  transform: none;
+  opacity: 1;
+}
+
+/* Convite para rolar: um traço de milho desce pela linha, devagar. */
+@keyframes scroll-cue {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(260%); }
+}
+
+.scroll-cue {
+  animation: scroll-cue 1.8s cubic-bezier(0.6, 0, 0.4, 1) infinite;
 }
 
 @media (prefers-reduced-motion: reduce) {

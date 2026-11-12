@@ -6,12 +6,12 @@ const steps = [
     text: 'A equipe do Festário cadastra o salão e manda um link de convite. Por ele você cria a sua conta de dono.',
   },
   {
-    title: 'Monte espaços, planos e agenda',
-    text: 'Cadastre cada espaço do salão, defina os planos com preço por dia da semana e bloqueie as datas que não estão à venda. Os feriados já aparecem no calendário.',
+    title: 'Monte espaços, pacotes e agenda',
+    text: 'Cadastre cada espaço, monte os pacotes cobrando do seu jeito (valor fixo, por hora ou por convidado) e bloqueie as datas que não estão à venda. Os feriados já aparecem no calendário.',
   },
   {
     title: 'O cliente reserva sozinho',
-    text: 'Ele escolhe uma data livre e o plano, recebe a cotação na hora, lê e aceita o contrato e paga o sinal direto ao salão.',
+    text: 'Ele escolhe uma data livre e o pacote, recebe a cotação na hora, lê e aceita o contrato e paga o sinal direto ao salão.',
   },
   {
     title: 'Você acompanha pelo painel',

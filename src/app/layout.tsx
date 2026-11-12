@@ -24,7 +24,7 @@ export const viewport: Viewport = {
 
 const title = 'Festário: reservas para salões de festa'
 const description =
-  'Agenda com datas livres, planos por dia da semana, contrato em PDF e controle do sinal e dos pagamentos. O cliente reserva sozinho e o dono do salão acompanha tudo pelo painel.'
+  'Agenda com datas livres, pacotes cobrados do jeito do seu salão (valor fixo, por hora ou por convidado), contrato em PDF e controle do sinal. O cliente reserva sozinho e o dono acompanha tudo pelo painel. R$ 100 por mês, com o primeiro mês grátis.'
 
 export const metadata: Metadata = {
   title,
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
-// Sem avaliações nem preço: ainda não existem, então não entram nos dados estruturados.
+// Sem avaliações: ainda não existem, então não entram nos dados estruturados. O preço é o da assinatura.
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
@@ -85,9 +85,16 @@ const structuredData = {
       description,
       inLanguage: 'pt-BR',
       publisher: { '@id': `${SITE_URL}/#organization` },
+      offers: {
+        '@type': 'Offer',
+        price: '100.00',
+        priceCurrency: 'BRL',
+        description: 'Assinatura mensal por estabelecimento, com todos os espaços. Primeiro mês grátis.',
+      },
       featureList: [
         'Calendário de disponibilidade com datas bloqueadas e feriados',
-        'Planos com preço por dia da semana',
+        'Pacotes com valor fixo, por hora ou por convidado, e adicionais',
+        'Preço diferente por dia da semana e feriado',
         'Reserva online com cotação',
         'Contrato em PDF com aceite',
         'Controle do sinal e dos pagamentos recebidos',
