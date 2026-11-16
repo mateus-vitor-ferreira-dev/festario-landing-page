@@ -5,9 +5,13 @@
 # <script> inline, com conteúdo diferente a cada build. O site não mostra dado de usuário, então não
 # há por onde injetar script. frame-ancestors 'none' impede que ele seja aberto dentro de outro site.
 #
+# O Cloudflare injeta na borda o script do Web Analytics (static.cloudflareinsights.com), que envia
+# para cloudflareinsights.com: os dois entram como exceção. Desligando o Web Analytics no painel,
+# podem sair.
+#
 # Referrer-Policy: os links para o app e para o WhatsApp levam só a origem, não o caminho.
 /*
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self' https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests
   Referrer-Policy: strict-origin-when-cross-origin
   X-Content-Type-Options: nosniff
   X-Frame-Options: DENY

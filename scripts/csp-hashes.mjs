@@ -35,7 +35,7 @@ for (const file of await htmlFiles(OUT)) {
   }
   // Página sem script inline (ex.: o arquivo de verificação do Google) não precisa de nada.
   if (hashes.size === 0) continue
-  const meta = `<meta http-equiv="Content-Security-Policy" content="script-src 'self' ${[...hashes].join(' ')}">`
+  const meta = `<meta http-equiv="Content-Security-Policy" content="script-src 'self' https://static.cloudflareinsights.com ${[...hashes].join(' ')}">`
   const out = html.replace(/<head([^>]*)>/i, (m) => `${m}${meta}`)
   if (out === html) throw new Error(`Sem <head> em ${file}`)
   await writeFile(file, out)
