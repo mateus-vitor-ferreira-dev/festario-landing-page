@@ -9,6 +9,12 @@ export const APP_SIGNUP_URL = `${APP_URL}/cadastro`
 export const APP_LOGIN_URL = `${APP_URL}/login`
 /** Vitrine pública de salões: quem quer reservar vê os salões antes de criar conta. */
 export const APP_SALONS_URL = `${APP_URL}/saloes`
+/** Vitrine de serviços de festa (marketplace). */
+export const APP_SERVICES_URL = `${APP_URL}/servicos`
+/** Prestador novo: cria a conta e volta direto no painel "Meu negócio". */
+export const APP_PROVIDER_SIGNUP_URL = `${APP_URL}/cadastro?voltar=${encodeURIComponent('/meu-negocio')}`
+/** Quem já tem conta entra e cai no "Meu negócio". */
+export const APP_PROVIDER_LOGIN_URL = `${APP_URL}/login?voltar=${encodeURIComponent('/meu-negocio')}`
 
 /** Endereço público desta landing: canonical, Open Graph, sitemap e robots. */
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || 'https://festario.com.br').replace(
