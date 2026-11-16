@@ -2,7 +2,11 @@
  * As categorias do marketplace como bandeirinhas num cordão: o mesmo motivo do logo e do filtro
  * de categoria da vitrine no app. Cores na ordem milho, pitanga, anil-claro, que se repete.
  */
-const CATEGORIES = ['Buffet', 'Churrasco', 'Decoração', 'Maquiagem', 'Bolo e doces', 'Foto e vídeo', 'Música e DJ', 'Recreação infantil', 'Bebidas e bar']
+// Mesma ordem do app: as parecidas lado a lado.
+const CATEGORIES = [
+  'Buffet', 'Churrasco', 'Bolo e doces', 'Bebidas e bar', 'Garçons e copa', 'Cerimonial', 'Decoração', 'Mesas e louças',
+  'Música e DJ', 'Recreação infantil', 'Foto e vídeo', 'Maquiagem', 'Segurança', 'Limpeza',
+]
 
 const COLORS = [
   'bg-milho text-anil-escuro',
@@ -11,10 +15,11 @@ const COLORS = [
 ]
 
 export default function CategoryFlags() {
-  // Uma linha só, presa no mesmo cordão: em tela estreita ela rola para o lado em vez de quebrar
-  // (bandeirinha em segunda linha ficaria solta, sem cordão).
+  // Uma linha só, presa no mesmo cordão: quando não cabe, ela rola para o lado em vez de quebrar
+  // (bandeirinha em segunda linha ficaria solta, sem cordão). A ponta direita esmaece para mostrar
+  // que o cordão continua.
   return (
-    <div className="-mx-5 sm:-mx-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+    <div className="-mx-5 sm:-mx-6 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_right,#000_82%,transparent)]">
       <ul aria-label="Categorias de serviço" className="relative flex w-max gap-x-2 px-5 sm:px-6 pt-[2px]">
         <li aria-hidden="true" className="absolute inset-x-0 top-0 h-[2px] rounded bg-white/35" />
         {CATEGORIES.map((c, i) => (
