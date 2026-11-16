@@ -11,7 +11,7 @@ export default function ForProvidersBand() {
               Trabalha com festas?
             </h2>
             <p className="mt-2 text-lg leading-relaxed text-grafite">
-              Buffet, decoração, maquiagem, doces, foto e música também têm vitrine no Festário, com pedidos de orçamento que já chegam com a data.
+              Buffet, decoração, doces, foto, música, garçons e cerimonial também têm vitrine no Festário, com pedidos de orçamento que já chegam com a data.
             </p>
           </div>
           <Link
