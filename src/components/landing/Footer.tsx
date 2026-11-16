@@ -4,11 +4,11 @@ import { APP_LOGIN_URL, APP_SIGNUP_URL, EMAIL_DISPLAY, EMAIL_URL, WHATSAPP_DISPL
 const linkClass = 'inline-flex items-center min-h-11 text-[15px] text-nevoa-texto hover:text-white transition-colors duration-200'
 
 const sections = [
-  { label: 'Como funciona', href: '#como-funciona' },
-  { label: 'Recursos', href: '#recursos' },
-  { label: 'Quem usa', href: '#quem-usa' },
-  { label: 'Preço', href: '#preco' },
-  { label: 'Dúvidas', href: '#duvidas' },
+  { label: 'Como funciona', href: '/#como-funciona' },
+  { label: 'Recursos', href: '/#recursos' },
+  { label: 'Quem usa', href: '/#quem-usa' },
+  { label: 'Preço', href: '/#preco' },
+  { label: 'Dúvidas', href: '/#duvidas' },
 ]
 
 export default function Footer() {
@@ -50,6 +50,11 @@ export default function Footer() {
               <li>
                 <a href={APP_SIGNUP_URL} className={linkClass}>
                   Criar conta
+                </a>
+              </li>
+              <li>
+                <a href="/prestadores" className={linkClass}>
+                  Para prestadores de festa
                 </a>
               </li>
             </ul>

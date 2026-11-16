@@ -13,6 +13,7 @@ const links = [
   { label: 'Quem usa', href: '#quem-usa' },
   { label: 'Preço', href: '#preco' },
   { label: 'Dúvidas', href: '#duvidas' },
+  { label: 'Prestadores', href: '/prestadores' },
 ]
 
 export default function Navbar() {
