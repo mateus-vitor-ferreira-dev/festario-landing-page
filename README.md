@@ -54,7 +54,7 @@ Endereço que não existe mostra a página 404 gerada pelo Next.
 
 ## Começando
 
-Requisitos: Node 20+ e npm.
+Requisitos: Node 22+ e npm.
 
 ```bash
 npm ci
@@ -104,7 +104,9 @@ Sem WhatsApp, o CTA do dono usa o e-mail. Sem nenhum dos dois, ele leva ao login
 - O **Cloudflare Workers Builds** publica a cada push na `main`: roda `npm run build` e `npx wrangler deploy`. A configuração fica em `wrangler.jsonc` (assets em `out/`, domínios `festario.com.br` e `www.festario.com.br`).
 - Cada branch ganha um link próprio de preview.
 - O **rebuild diário** (`.github/workflows/rebuild-diario.yml`) chama o deploy hook do Cloudflare às 00:10 de Brasília, para o calendário do hero acompanhar o mês. Precisa do segredo `CLOUDFLARE_DEPLOY_HOOK`.
-- O **CI** (`.github/workflows/ci.yml`) roda `npm ci` e `npm run build` em Node 20, a cada push e PR na `main` e na `develop`.
+- O **CI** (`.github/workflows/ci.yml`) roda `npm ci`, `npm run lint` e `npm run build` em Node 22, a cada push e PR na `main` e na `develop`, com o token do GitHub só de leitura e as Actions fixadas pelo commit. O Dependabot propõe as atualizações de dependências e de Actions.
+- O **build** gera o site e, depois, coloca em cada página uma CSP com o hash exato dos scripts inline (`scripts/csp-hashes.mjs`). Os cabeçalhos de segurança ficam em `public/_headers`.
+- O `.npmrc` desliga os scripts de instalação das dependências (`ignore-scripts`): um pacote comprometido não roda código só por ser instalado.
 
 ## Estrutura do projeto
 
