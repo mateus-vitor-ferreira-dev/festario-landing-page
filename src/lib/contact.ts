@@ -5,6 +5,12 @@
 
 /** Endereço do app de reservas (sem barra no fim). */
 export const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:5173').replace(/\/+$/, '')
+
+// Em produção os botões levam ao cadastro e ao login: endereço sem HTTPS (ou o padrão de dev) quebra
+// o build em vez de ir ao ar.
+if (process.env.NODE_ENV === 'production' && !APP_URL.startsWith('https://')) {
+  throw new Error(`NEXT_PUBLIC_APP_URL precisa ser https em produção (veio "${APP_URL}").`)
+}
 export const APP_SIGNUP_URL = `${APP_URL}/cadastro`
 export const APP_LOGIN_URL = `${APP_URL}/login`
 /** Vitrine pública de salões: quem quer reservar vê os salões antes de criar conta. */

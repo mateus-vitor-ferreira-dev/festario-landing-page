@@ -12,9 +12,13 @@ on:
     - cron: "10 3 * * *" # 00:10 em Brasília
   workflow_dispatch: # para pedir um build na hora, pela aba Actions
 
+# Só chama o deploy hook: o token do GitHub não precisa de permissão nenhuma.
+permissions: {}
+
 jobs:
   rebuild:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     steps:
       - name: Pedir um build ao Cloudflare
         env:
@@ -24,4 +28,4 @@ jobs:
             echo "::warning::Segredo CLOUDFLARE_DEPLOY_HOOK não configurado; nada a fazer."
             exit 0
           fi
-          curl --fail --silent --show-error -X POST "$DEPLOY_HOOK"
+          curl --fail --silent --show-error --max-time 30 -X POST "$DEPLOY_HOOK" > /dev/null
