@@ -2,9 +2,11 @@
   "name": "festario-landing",
   "version": "0.1.0",
   "private": true,
+  "license": "UNLICENSED",
+  "author": "Mateus Vitor Ferreira",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build && node scripts/csp-hashes.mjs",
     "start": "next start",
     "lint": "eslint"
   },

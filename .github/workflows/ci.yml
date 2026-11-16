@@ -6,22 +6,34 @@ on:
   push:
     branches: [main, develop]
 
+# O build só lê o repositório: o token do GitHub não precisa de mais nada.
+permissions:
+  contents: read
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
 
     steps:
+      # Actions fixadas pelo commit (e não pela tag, que pode ser movida); o Dependabot propõe as atualizações.
       - name: Checkout do código
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
+        with:
+          # o token não fica salvo no .git, onde um script de dependência conseguiria ler
+          persist-credentials: false
 
       - name: Configurar Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Instalar dependências
         run: npm ci
+
+      - name: Lint
+        run: npm run lint
 
       - name: Build da aplicação
         run: npm run build
