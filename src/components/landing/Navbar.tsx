@@ -1,25 +1,23 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { APP_LOGIN_URL, OWNER_CTA_PROPS } from '@/lib/contact'
+import { APP_LOGIN_URL } from '@/lib/contact'
 import { Logo } from '@/components/brand/Logo'
 
-const links = [
-  { label: 'Uma reserva', href: '#uma-reserva' },
-  { label: 'Como funciona', href: '#como-funciona' },
-  { label: 'Recursos', href: '#recursos' },
-  { label: 'Quem usa', href: '#quem-usa' },
-  { label: 'Preço', href: '#preco' },
-  { label: 'Dúvidas', href: '#duvidas' },
-  { label: 'Prestadores', href: '/prestadores' },
-]
+export type NavLink = { label: string; href: string }
 
-export default function Navbar() {
+/** Botão principal da barra: o rótulo curto vai na barra, o longo no menu do celular. */
+export type NavCta = { label: string; mobileLabel: string; href: string; target?: string; rel?: string }
+
+export default function Navbar({ links, cta }: { links: NavLink[]; cta: NavCta }) {
+  const { label: ctaLabel, mobileLabel: ctaMobileLabel, ...ctaProps } = cta
   const [scrolled, setScrolled] = useState(false)
   const [overDark, setOverDark] = useState(true)
   const [open, setOpen] = useState(false)
+  const [active, setActive] = useState<string | null>(null)
 
   useEffect(() => {
     // a barra acompanha o que está embaixo dela: escura e translúcida sobre as cenas escuras
@@ -31,11 +29,21 @@ export default function Navbar() {
         return r.top <= 34 && r.bottom > 34
       })
       setOverDark(dark)
+
+      // seção atual: a última âncora do menu cujo topo já passou da barra
+      let current: string | null = null
+      for (const l of links) {
+        if (!l.href.startsWith('#')) continue
+        const target = document.getElementById(l.href.slice(1))
+        const section = target?.closest('section') ?? target
+        if (section && section.getBoundingClientRect().top <= 120) current = l.href
+      }
+      setActive(current)
     }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+  }, [links])
 
   useEffect(() => {
     if (!open) return
@@ -62,17 +70,18 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-6xl mx-auto px-5 sm:px-6 h-[68px] flex items-center justify-between gap-4">
-        <a href="#" className="flex items-center min-h-11" aria-label="Festário, início da página">
+        <Link href="/" className="flex items-center min-h-11" aria-label="Festário, página inicial">
           <Logo tone={light ? 'light' : 'dark'} title="" className="h-8 w-auto" />
-        </a>
+        </Link>
 
         <nav aria-label="Principal" className="hidden lg:flex items-center gap-1">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
+              aria-current={active === l.href ? 'location' : undefined}
               className={cn(
-                'inline-flex items-center min-h-11 px-3 rounded-md text-[15px] font-medium transition-colors duration-200',
+                'nav-mark inline-flex items-center min-h-11 px-3 rounded-md text-[15px] font-medium transition-colors duration-200',
                 light ? 'text-grafite hover:text-anil-escuro hover:bg-nevoa-funda' : 'text-nevoa-texto hover:text-white'
               )}
             >
@@ -89,13 +98,13 @@ export default function Navbar() {
             Entrar
           </a>
           <a
-            {...OWNER_CTA_PROPS}
+            {...ctaProps}
             className={cn(
-              'ml-1 inline-flex items-center min-h-11 px-5 rounded-lg text-[15px] font-bold transition-colors duration-200',
+              'press ml-1 inline-flex items-center min-h-11 px-5 rounded-lg text-[15px] font-bold transition-colors duration-200',
               light ? 'bg-anil text-white hover:bg-anil-escuro' : 'bg-anil-claro text-noite hover:bg-white'
             )}
           >
-            Quero o Festário
+            {ctaLabel}
           </a>
         </nav>
 
@@ -131,10 +140,10 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            {...OWNER_CTA_PROPS}
+            {...ctaProps}
             className="mt-5 inline-flex items-center justify-center min-h-12 rounded-lg bg-anil text-white text-base font-bold"
           >
-            Quero o Festário no meu salão
+            {ctaMobileLabel}
           </a>
           <a
             href={APP_LOGIN_URL}

@@ -1,14 +1,25 @@
 import { Logo } from '@/components/brand/Logo'
-import { APP_LOGIN_URL, APP_SIGNUP_URL, EMAIL_DISPLAY, EMAIL_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '@/lib/contact'
+import { APP_LOGIN_URL, APP_SALONS_URL, APP_SERVICES_URL, APP_SIGNUP_URL, EMAIL_DISPLAY, EMAIL_URL, WHATSAPP_DISPLAY, WHATSAPP_URL } from '@/lib/contact'
 
 const linkClass = 'inline-flex items-center min-h-11 text-[15px] text-nevoa-texto hover:text-white transition-colors duration-200'
 
-const sections = [
-  { label: 'Como funciona', href: '/#como-funciona' },
-  { label: 'Recursos', href: '/#recursos' },
-  { label: 'Quem usa', href: '/#quem-usa' },
-  { label: 'Preço', href: '/#preco' },
-  { label: 'Dúvidas', href: '/#duvidas' },
+const columns = [
+  {
+    title: 'Fazer uma festa',
+    links: [
+      { label: 'Salões com data livre', href: APP_SALONS_URL },
+      { label: 'Serviços de festa', href: APP_SERVICES_URL },
+      { label: 'Criar conta', href: APP_SIGNUP_URL },
+    ],
+  },
+  {
+    title: 'Para negócios',
+    links: [
+      { label: 'Festário para salões', href: '/para-saloes' },
+      { label: 'Festário para prestadores', href: '/prestadores' },
+      { label: 'Entrar', href: APP_LOGIN_URL },
+    ],
+  },
 ]
 
 export default function Footer() {
@@ -22,47 +33,28 @@ export default function Footer() {
             <Logo tone="dark" className="h-9 w-auto" />
             <p className="mt-5 font-display font-semibold text-xl text-white">Data marcada, festa garantida.</p>
             <p className="mt-2 text-[15px] leading-relaxed text-nevoa-texto max-w-xs">
-              Agenda, contrato e pagamento para salões de festa.
+              Salões e serviços de festa num lugar só: para quem faz a festa e para quem trabalha com ela.
             </p>
           </div>
 
-          <nav aria-label="Seções da página">
-            <h2 className="font-sans text-[15px] font-bold text-white mb-1">Na página</h2>
-            <ul>
-              {sections.map((s) => (
-                <li key={s.href}>
-                  <a href={s.href} className={linkClass}>
-                    {s.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          <nav aria-label="App">
-            <h2 className="font-sans text-[15px] font-bold text-white mb-1">App</h2>
-            <ul>
-              <li>
-                <a href={APP_LOGIN_URL} className={linkClass}>
-                  Entrar
-                </a>
-              </li>
-              <li>
-                <a href={APP_SIGNUP_URL} className={linkClass}>
-                  Criar conta
-                </a>
-              </li>
-              <li>
-                <a href="/prestadores" className={linkClass}>
-                  Para prestadores de festa
-                </a>
-              </li>
-            </ul>
-          </nav>
+          {columns.map((col) => (
+            <nav key={col.title} aria-label={col.title}>
+              <p className="text-[15px] font-bold text-white mb-1">{col.title}</p>
+              <ul>
+                {col.links.map((l) => (
+                  <li key={l.href}>
+                    <a href={l.href} className={linkClass}>
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          ))}
 
           {(WHATSAPP_URL || EMAIL_URL) && (
             <div>
-              <h2 className="font-sans text-[15px] font-bold text-white mb-1">Contato</h2>
+              <p className="text-[15px] font-bold text-white mb-1">Contato</p>
               <ul>
                 {WHATSAPP_URL && (
                   <li>

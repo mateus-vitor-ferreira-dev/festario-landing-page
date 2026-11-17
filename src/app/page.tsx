@@ -1,38 +1,41 @@
-import Navbar from '@/components/landing/Navbar'
-import HeroSection from '@/components/landing/HeroSection'
-import HowItWorksSection from '@/components/landing/HowItWorksSection'
-import FeaturesSection from '@/components/landing/FeaturesSection'
-import ForClientsSection from '@/components/landing/ForClientsSection'
-import ForProvidersBand from '@/components/landing/ForProvidersBand'
+import Navbar, { type NavLink } from '@/components/landing/Navbar'
+import HomeHero from '@/components/home/HomeHero'
+import PartySection from '@/components/home/PartySection'
+import SalonsSection from '@/components/home/SalonsSection'
+import ProvidersSection from '@/components/home/ProvidersSection'
 import ShowcaseSection from '@/components/landing/ShowcaseSection'
-import StorySection from '@/components/landing/StorySection'
-import PlansSection from '@/components/landing/PlansSection'
 import FaqSection from '@/components/landing/FaqSection'
-import CTASection from '@/components/landing/CTASection'
 import Footer from '@/components/landing/Footer'
-import WhatsAppFloat from '@/components/landing/WhatsAppFloat'
+import { HOME_FAQS } from '@/content/faqs'
+import { APP_SALONS_URL, SITE_URL } from '@/lib/contact'
+import { JsonLd, faqPageSchema } from '@/lib/seo'
 
-// O calendário do hero mostra o mês corrente. A página é estática, gerada no build; o
-// rebuild diário (.github/workflows/rebuild-diario.yml) a mantém no mês certo.
+// A home fala com os três públicos: quem faz a festa, o dono de salão e quem presta serviço.
+// Cada um tem um resumo aqui e uma página própria (/para-saloes e /prestadores).
 
-export default function LandingPage() {
+const links: NavLink[] = [
+  { label: 'Fazer uma festa', href: '#fazer-festa' },
+  { label: 'Para salões', href: '#saloes' },
+  { label: 'Para prestadores', href: '#prestadores' },
+  { label: 'Dúvidas', href: '#duvidas' },
+]
+
+const structuredData = { '@context': 'https://schema.org', ...faqPageSchema(HOME_FAQS, `${SITE_URL}/`) }
+
+export default function HomePage() {
   return (
     <>
-      <Navbar />
+      <JsonLd data={structuredData} />
+      <Navbar links={links} cta={{ label: 'Procurar salão', mobileLabel: 'Procurar um salão', href: APP_SALONS_URL }} />
       <main>
-        <HeroSection />
-        <StorySection />
-        <HowItWorksSection />
-        <FeaturesSection />
-        <ForClientsSection />
-        <ForProvidersBand />
+        <HomeHero />
+        <PartySection />
+        <SalonsSection />
+        <ProvidersSection />
         <ShowcaseSection />
-        <PlansSection />
-        <FaqSection />
-        <CTASection />
+        <FaqSection faqs={HOME_FAQS} className="bg-papel" />
       </main>
       <Footer />
-      <WhatsAppFloat />
     </>
   )
 }
