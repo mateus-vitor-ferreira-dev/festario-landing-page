@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next'
 import { Alegreya, Alegreya_Sans } from 'next/font/google'
-import { APP_URL, SITE_URL } from '@/lib/contact'
+import { SITE_URL, WHATSAPP_E164 } from '@/lib/contact'
+import RevealObserver from '@/components/motion/RevealObserver'
+import { JsonLd, OG_IMAGE, ORGANIZATION_ID } from '@/lib/seo'
 import './globals.css'
 
 const alegreya = Alegreya({
@@ -22,24 +24,17 @@ export const viewport: Viewport = {
   viewportFit: 'cover',
 }
 
-const title = 'Festário: reservas para salões de festa'
+// Título e descrição no tamanho que o Google mostra inteiro (até ~60 e ~155 caracteres).
+const title = 'Festário: salão e serviços de festa num lugar só'
 const description =
-  'Agenda com datas livres, pacotes cobrados do jeito do seu salão (valor fixo, por hora ou por convidado), contrato em PDF e controle do sinal. O cliente reserva sozinho e o dono acompanha tudo pelo painel. R$ 100 por mês, com o primeiro mês grátis.'
+  'Encontre salão de festas com a data livre, reserve online e contrate buffet, decoração, doces, foto e música para o mesmo dia. Grátis para quem faz a festa.'
 
 export const metadata: Metadata = {
-  title,
+  title: { default: title, template: '%s | Festário' },
   description,
   applicationName: 'Festário',
   metadataBase: new URL(SITE_URL),
   alternates: { canonical: '/' },
-  keywords: [
-    'sistema de reservas para salão de festas',
-    'agenda de salão de festas',
-    'gestão de espaço de eventos',
-    'reserva online de salão',
-    'contrato de locação de salão',
-    'Festário',
-  ],
   openGraph: {
     title,
     description,
@@ -47,61 +42,48 @@ export const metadata: Metadata = {
     siteName: 'Festário',
     locale: 'pt_BR',
     type: 'website',
-    images: [
-      {
-        url: '/og-festario.png',
-        width: 1200,
-        height: 630,
-        alt: 'Logotipo do Festário sob um varal de bandeirinhas, com o slogan Data marcada, festa garantida.',
-      },
-    ],
+    images: [OG_IMAGE],
   },
   twitter: {
     card: 'summary_large_image',
     title,
     description,
-    images: ['/og-festario.png'],
+    images: [OG_IMAGE.url],
   },
   robots: { index: true, follow: true },
+  // O número do WhatsApp aparece como texto: sem isso o iOS o transforma em link de ligação
+  formatDetection: { telephone: false },
 }
 
-// Sem avaliações: ainda não existem, então não entram nos dados estruturados. O preço é o da assinatura.
+// Vale para o site todo. Os dados de cada página (produto, perguntas, trilha) ficam na própria página.
 const structuredData = {
   '@context': 'https://schema.org',
   '@graph': [
     {
       '@type': 'Organization',
-      '@id': `${SITE_URL}/#organization`,
+      '@id': ORGANIZATION_ID,
       name: 'Festário',
+      slogan: 'Data marcada, festa garantida.',
       url: SITE_URL,
-      logo: `${SITE_URL}/brand/festario-simbolo.svg`,
+      // O Google pede logo em formato raster de pelo menos 112 px
+      logo: `${SITE_URL}/apple-icon.png`,
+      ...(WHATSAPP_E164 && {
+        contactPoint: {
+          '@type': 'ContactPoint',
+          contactType: 'sales',
+          telephone: WHATSAPP_E164,
+          areaServed: 'BR',
+          availableLanguage: 'pt-BR',
+        },
+      }),
     },
     {
-      '@type': 'SoftwareApplication',
+      '@type': 'WebSite',
+      '@id': `${SITE_URL}/#website`,
       name: 'Festário',
-      applicationCategory: 'BusinessApplication',
-      operatingSystem: 'Web',
-      url: APP_URL,
-      description,
+      url: SITE_URL,
       inLanguage: 'pt-BR',
-      publisher: { '@id': `${SITE_URL}/#organization` },
-      offers: {
-        '@type': 'Offer',
-        price: '100.00',
-        priceCurrency: 'BRL',
-        description: 'Assinatura mensal por estabelecimento, com todos os espaços. Primeiro mês grátis.',
-      },
-      featureList: [
-        'Calendário de disponibilidade com datas bloqueadas e feriados',
-        'Pacotes com valor fixo, por hora ou por convidado, e adicionais',
-        'Preço diferente por dia da semana e feriado',
-        'Reserva online com cotação',
-        'Contrato em PDF com aceite',
-        'Controle do sinal e dos pagamentos recebidos',
-        'Negociação por chat com proposta de preço',
-        'Promoções de indicação, fidelidade e sorteio',
-        'Painel do dono com reservas, clientes, campanhas e espaços',
-      ],
+      publisher: { '@id': ORGANIZATION_ID },
     },
   ],
 }
@@ -110,12 +92,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${alegreya.variable} ${alegreyaSans.variable}`}>
       <body>
-        <script
-          type="application/ld+json"
-          // `<` escapado: nenhum texto dos dados consegue fechar a tag <script> antes da hora
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, '\\u003c') }}
-        />
+        <JsonLd data={structuredData} />
         {children}
+        <RevealObserver />
       </body>
     </html>
   )

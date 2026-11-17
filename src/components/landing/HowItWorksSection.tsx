@@ -1,4 +1,5 @@
 import SectionHeader from './SectionHeader'
+import Steps from './Steps'
 
 const steps = [
   {
@@ -27,17 +28,7 @@ export default function HowItWorksSection() {
           Do convite à primeira reserva paga, em quatro passos.
         </SectionHeader>
 
-        <ol className="grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, i) => (
-            <li key={step.title} className="border-t-2 border-anil pt-5">
-              <span className="font-display font-semibold text-3xl leading-none text-anil tabular-nums" aria-hidden="true">
-                {i + 1}
-              </span>
-              <h3 className="mt-3 font-display font-semibold text-2xl leading-snug text-anil-escuro">{step.title}</h3>
-              <p className="mt-2 text-base leading-relaxed text-grafite">{step.text}</p>
-            </li>
-          ))}
-        </ol>
+        <Steps steps={steps} tone="anil" />
       </div>
     </section>
   )

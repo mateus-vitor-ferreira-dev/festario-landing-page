@@ -45,6 +45,8 @@ export const WHATSAPP_URL = whatsappDigits
   ? `https://wa.me/${whatsappDigits}?text=${encodeURIComponent(OWNER_MESSAGE)}`
   : null
 export const WHATSAPP_DISPLAY = whatsappDigits ? formatBrPhone(whatsappDigits) : null
+/** +5535997460058: o formato dos dados estruturados. */
+export const WHATSAPP_E164 = whatsappDigits ? `+${whatsappDigits}` : null
 
 /** E-mail comercial: opcional, só aparece se NEXT_PUBLIC_CONTACT_EMAIL estiver definido. */
 const contactEmail = process.env.NEXT_PUBLIC_CONTACT_EMAIL?.trim() || null

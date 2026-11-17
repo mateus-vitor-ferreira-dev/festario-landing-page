@@ -1,11 +1,13 @@
 import { Check } from 'lucide-react'
 import { HAS_CONTACT, OWNER_CTA_PROPS } from '@/lib/contact'
+import Stamp from './Stamp'
 
 // Uma assinatura só: R$ 100 por mês por estabelecimento, com todos os espaços, e o primeiro
 // mês grátis. Sem cobrança automática por enquanto: o dono entra por convite.
 const included = [
   'Todos os espaços do seu salão, sem pagar a mais por eles',
   'Reservas, clientes e contratos sem limite',
+  'Sem comissão: o valor das reservas é todo do salão',
   'Pacotes com valor fixo, por hora ou por convidado, e adicionais',
   'Vitrine do salão, negociação por chat e promoções',
 ]
@@ -24,15 +26,12 @@ export default function PlansSection() {
           </p>
         </header>
 
-        <div className="rounded-3xl bg-anil-escuro text-white p-7 sm:p-10 on-dark">
+        <div data-reveal="" className="relative rounded-3xl bg-anil-escuro text-white p-7 sm:p-10 on-dark">
+          <Stamp className="-top-10 right-4 sm:-top-12 sm:-right-8">1º mês grátis</Stamp>
           <p className="flex items-baseline gap-3">
             <span className="font-display font-semibold text-[clamp(3.5rem,9vw,6rem)] leading-none tabular-nums">R$ 100</span>
             <span className="text-xl text-nevoa-texto">por mês</span>
           </p>
-          <p className="mt-3 inline-flex items-center rounded-full bg-milho px-4 py-1.5 text-base font-bold text-anil-escuro">
-            O primeiro mês é grátis
-          </p>
-
           <ul className="mt-8 space-y-3 border-t border-white/15 pt-6">
             {included.map((item) => (
               <li key={item} className="flex gap-3 text-lg leading-snug">
@@ -44,7 +43,7 @@ export default function PlansSection() {
 
           <a
             {...OWNER_CTA_PROPS}
-            className="mt-9 inline-flex w-full sm:w-auto items-center justify-center min-h-13 px-7 rounded-full bg-anil-claro text-noite text-base font-bold hover:bg-white transition-colors duration-200"
+            className="press mt-9 inline-flex w-full sm:w-auto items-center justify-center min-h-13 px-7 rounded-full bg-anil-claro text-noite text-base font-bold hover:bg-white transition-colors duration-200"
           >
             {HAS_CONTACT ? 'Quero o primeiro mês grátis' : 'Entrar no app'}
           </a>
